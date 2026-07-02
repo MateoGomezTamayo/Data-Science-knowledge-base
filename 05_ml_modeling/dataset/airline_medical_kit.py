@@ -2,7 +2,13 @@
 airline_medical_kit.py
 ======================
 Airline Medical Kit — Predict Kit Usefulness
-Binary classification: predict whether a passenger will use the kit (kit_used = 1)
+Binary classification: predict Target (1 = claim filed, 0 = no claim)
+
+Dataset
+-------
+    train.csv          — labelled rows (ID, features, Target)
+    test.csv           — unlabelled rows (ID, features)
+    sample_submission.csv — expected output format (ID, Target)
 
 Usage
 -----
@@ -10,13 +16,13 @@ Usage
 
 Output
 ------
-    - Console: CV scores, test metrics, business insights
-    - Plots: EDA dashboard, evaluation dashboard, feature importance
-    - Files: predictions.csv  (test set predictions)
+    - Console : CV scores, evaluation metrics
+    - Plots   : EDA, evaluation dashboard, feature importance
+    - File    : submission.csv  (ID, Target) — same format as sample_submission.csv
 """
 
 # ── Imports ───────────────────────────────────────────────────
-import warnings
+import os, warnings
 warnings.filterwarnings("ignore")
 
 import numpy as np
@@ -28,7 +34,7 @@ from sklearn.model_selection import (
 )
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -37,201 +43,163 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay, RocCurveDisplay, PrecisionRecallDisplay
 )
 
-# ══════════════════════════════════════════════════════════════
-# 1. GENERATE DATASET
-# ══════════════════════════════════════════════════════════════
-def generate_dataset(n: int = 3000, seed: int = 0) -> pd.DataFrame:
-    """Generate synthetic airline medical kit dataset."""
-    rng = np.random.default_rng(seed)
+# ── Paths ─────────────────────────────────────────────────────
+BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
+TRAIN_PATH = os.path.join(BASE_DIR, "train.csv")
+TEST_PATH  = os.path.join(BASE_DIR, "test.csv")
+SUB_PATH   = os.path.join(BASE_DIR, "submission.csv")
 
-    age                    = rng.integers(18, 80, n).astype(float)
-    flight_duration_h      = rng.uniform(0.5, 16, n)
-    has_chronic_condition  = rng.integers(0, 2, n)
-    previous_kit_purchases = rng.integers(0, 6, n).astype(float)
-    altitude_sensitivity   = rng.integers(1, 11, n).astype(float)
-    travel_class           = rng.choice(["Economy", "Business", "First"], n, p=[0.70, 0.20, 0.10])
-    flight_type            = rng.choice(["Domestic", "International"], n, p=[0.45, 0.55])
-    seat_position          = rng.choice(["Window", "Middle", "Aisle"], n)
-    meal_type              = rng.choice(
-        ["Standard", "Vegetarian", "Diabetic", "Low-sodium"], n,
-        p=[0.55, 0.20, 0.15, 0.10]
-    )
-
-    # Inject missing values
-    age[rng.random(n) < 0.04]                 = np.nan
-    flight_duration_h[rng.random(n) < 0.03]   = np.nan
-    altitude_sensitivity[rng.random(n) < 0.05] = np.nan
-
-    # Target: logistic function with realistic drivers
-    logit = (
-        -2.0
-        + 0.015 * np.where(np.isnan(age), 40, age)
-        + 0.12  * np.where(np.isnan(flight_duration_h), 5, flight_duration_h)
-        + 1.20  * has_chronic_condition
-        + 0.35  * previous_kit_purchases
-        + 0.10  * np.where(np.isnan(altitude_sensitivity), 5, altitude_sensitivity)
-        + 0.40  * (meal_type == "Diabetic").astype(int)
-        + 0.30  * (meal_type == "Low-sodium").astype(int)
-        + 0.20  * (flight_type == "International").astype(int)
-        + rng.normal(0, 0.4, n)
-    )
-    kit_used = (1 / (1 + np.exp(-logit)) > 0.5).astype(int)
-
-    return pd.DataFrame({
-        "age":                    age,
-        "flight_duration_h":      flight_duration_h,
-        "travel_class":           travel_class,
-        "has_chronic_condition":  has_chronic_condition,
-        "previous_kit_purchases": previous_kit_purchases,
-        "altitude_sensitivity":   altitude_sensitivity,
-        "flight_type":            flight_type,
-        "seat_position":          seat_position,
-        "meal_type":              meal_type,
-        "kit_used":               kit_used,
-    })
+# ── Feature config ────────────────────────────────────────────
+# Gender: 70% missing → treat as numeric with median imputation
+NUM_COLS = ["Distributor", "Product", "Duration", "Destination",
+            "Sales", "Commission", "Gender", "Age"]
 
 
 # ══════════════════════════════════════════════════════════════
-# 2. EDA PLOT
+# 1. LOAD DATA
 # ══════════════════════════════════════════════════════════════
-def plot_eda(df: pd.DataFrame) -> None:
+def load_data():
+    train = pd.read_csv(TRAIN_PATH)
+    test  = pd.read_csv(TEST_PATH)
+    print(f"Train : {train.shape}  |  Target balance: {train['Target'].mean():.2%} positive")
+    print(f"Test  : {test.shape}")
+    print(f"Missing Gender — train: {train['Gender'].isna().sum()}  "
+          f"test: {test['Gender'].isna().sum()}")
+    return train, test
+
+
+# ══════════════════════════════════════════════════════════════
+# 2. EDA
+# ══════════════════════════════════════════════════════════════
+def plot_eda(train: pd.DataFrame) -> None:
     fig, axes = plt.subplots(2, 4, figsize=(18, 8))
+    plot_cols = ["Age", "Sales", "Commission", "Duration",
+                 "Distributor", "Product", "Destination", "Gender"]
 
-    num_cols = ["age", "flight_duration_h", "altitude_sensitivity", "previous_kit_purchases"]
-    cat_cols = ["travel_class", "flight_type", "meal_type", "has_chronic_condition"]
-
-    for ax, col in zip(axes[0], num_cols):
-        for label, grp in df.groupby("kit_used"):
-            ax.hist(grp[col].dropna(), bins=25, alpha=0.6, label=f"kit_used={label}")
+    for ax, col in zip(axes.flat, plot_cols):
+        for label, grp in train.groupby("Target"):
+            ax.hist(grp[col].dropna(), bins=30, alpha=0.6, label=f"Target={label}")
         ax.set_title(col)
         ax.legend(fontsize=7)
         ax.spines[["top", "right"]].set_visible(False)
 
-    for ax, col in zip(axes[1], cat_cols):
-        rates = df.groupby(col)["kit_used"].mean().sort_values()
-        ax.barh(rates.index.astype(str), rates.values, color="steelblue")
-        ax.axvline(df["kit_used"].mean(), color="crimson", ls="--", label="overall mean")
-        ax.set_title(f"Kit use rate by {col}")
-        ax.set_xlabel("P(kit used)")
-        ax.legend(fontsize=7)
-        ax.spines[["top", "right"]].set_visible(False)
-
-    plt.suptitle("EDA — Airline Medical Kit", fontsize=14, fontweight="bold")
+    plt.suptitle("EDA — Airline Medical Kit (train.csv)", fontsize=14, fontweight="bold")
     plt.tight_layout()
     plt.show()
 
+    print("\n── Correlation with Target ──")
+    print(train[NUM_COLS + ["Target"]].corr()["Target"].drop("Target").sort_values().round(3))
+
 
 # ══════════════════════════════════════════════════════════════
-# 3. BUILD PREPROCESSING + PIPELINE
+# 3. PIPELINE
 # ══════════════════════════════════════════════════════════════
-NUM_COLS = ["age", "flight_duration_h", "altitude_sensitivity",
-            "previous_kit_purchases", "has_chronic_condition"]
-CAT_COLS = ["travel_class", "flight_type", "seat_position", "meal_type"]
-
-
 def build_pipeline(model) -> Pipeline:
-    num_pipe = Pipeline([
-        ("imputer", SimpleImputer(strategy="median")),
-        ("scaler",  StandardScaler()),
-    ])
-    cat_pipe = Pipeline([
-        ("imputer", SimpleImputer(strategy="most_frequent")),
-        ("encoder", OneHotEncoder(drop="first", handle_unknown="ignore", sparse_output=False)),
-    ])
     preprocessor = ColumnTransformer([
-        ("num", num_pipe, NUM_COLS),
-        ("cat", cat_pipe, CAT_COLS),
+        ("num", Pipeline([
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler",  StandardScaler()),
+        ]), NUM_COLS),
     ])
     return Pipeline([("prep", preprocessor), ("model", model)])
 
 
 # ══════════════════════════════════════════════════════════════
-# 4. TRAIN & EVALUATE
+# 4. TRAIN & EVALUATE (on train/val split)
 # ══════════════════════════════════════════════════════════════
-def train_and_evaluate(X_train, X_test, y_train, y_test):
+def train_and_evaluate(X_train, X_val, y_train, y_val):
+    # Class weights — dataset is highly imbalanced (~4.7% positive)
+    pos_weight = (y_train == 0).sum() / (y_train == 1).sum()
+
     models = {
-        "Logistic Regression": LogisticRegression(max_iter=1000, class_weight="balanced"),
-        "Random Forest":       RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=42),
-        "Gradient Boosting":   GradientBoostingClassifier(n_estimators=200, learning_rate=0.05, random_state=42),
+        "Logistic Regression": LogisticRegression(
+            max_iter=1000, class_weight="balanced"),
+        "Random Forest": RandomForestClassifier(
+            n_estimators=300, class_weight="balanced", random_state=42),
+        "Gradient Boosting": GradientBoostingClassifier(
+            n_estimators=300, learning_rate=0.05, max_depth=4, random_state=42),
     }
 
-    cv    = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-    best  = {"name": None, "pipe": None, "auc": 0}
+    cv   = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+    best = {"name": None, "pipe": None, "auc": 0}
 
     print("\n── Model comparison ──────────────────────────────────")
     for name, model in models.items():
         pipe   = build_pipeline(model)
         cv_auc = cross_val_score(pipe, X_train, y_train, cv=cv, scoring="roc_auc")
         pipe.fit(X_train, y_train)
-        test_auc = roc_auc_score(y_test, pipe.predict_proba(X_test)[:, 1])
-        print(f"  {name:25s}  CV={cv_auc.mean():.4f}±{cv_auc.std():.4f}  Test-AUC={test_auc:.4f}")
-        if test_auc > best["auc"]:
-            best = {"name": name, "pipe": pipe, "auc": test_auc}
+        val_auc = roc_auc_score(y_val, pipe.predict_proba(X_val)[:, 1])
+        print(f"  {name:25s}  CV={cv_auc.mean():.4f}±{cv_auc.std():.4f}  Val-AUC={val_auc:.4f}")
+        if val_auc > best["auc"]:
+            best = {"name": name, "pipe": pipe, "auc": val_auc}
 
-    print(f"\n  ✅ Best: {best['name']}  (Test-AUC={best['auc']:.4f})")
+    print(f"\n  ✅ Best: {best['name']}  (Val-AUC={best['auc']:.4f})")
     return best
 
 
-def plot_evaluation(pipe, name, X_test, y_test) -> None:
+def plot_evaluation(pipe, name, X_val, y_val) -> None:
+    y_proba = pipe.predict_proba(X_val)[:, 1]
     fig, axes = plt.subplots(1, 3, figsize=(16, 4))
-    y_proba   = pipe.predict_proba(X_test)[:, 1]
 
-    ConfusionMatrixDisplay.from_estimator(pipe, X_test, y_test,
+    ConfusionMatrixDisplay.from_estimator(pipe, X_val, y_val,
                                           normalize="true", cmap="Blues", ax=axes[0])
     axes[0].set_title(f"Confusion Matrix\n{name}")
 
-    RocCurveDisplay.from_estimator(pipe, X_test, y_test, ax=axes[1])
-    axes[1].set_title(f"ROC  AUC={roc_auc_score(y_test, y_proba):.3f}")
+    RocCurveDisplay.from_estimator(pipe, X_val, y_val, ax=axes[1])
+    axes[1].set_title(f"ROC  AUC={roc_auc_score(y_val, y_proba):.3f}")
 
-    PrecisionRecallDisplay.from_estimator(pipe, X_test, y_test, ax=axes[2])
-    axes[2].set_title(f"PR  AP={average_precision_score(y_test, y_proba):.3f}")
+    PrecisionRecallDisplay.from_estimator(pipe, X_val, y_val, ax=axes[2])
+    axes[2].set_title(f"PR  AP={average_precision_score(y_val, y_proba):.3f}")
 
     plt.suptitle(f"Evaluation — {name}", fontsize=13, fontweight="bold")
     plt.tight_layout()
     plt.show()
 
     print("\n── Classification Report ──")
-    print(classification_report(y_test, pipe.predict(X_test),
-                                target_names=["Not Used", "Used"]))
+    print(classification_report(y_val, pipe.predict(X_val),
+                                target_names=["No Claim (0)", "Claim (1)"]))
 
 
 def plot_feature_importance(pipe, name) -> None:
-    cat_names = (pipe.named_steps["prep"]
-                 .named_transformers_["cat"]["encoder"]
-                 .get_feature_names_out(CAT_COLS))
-    feat_names = NUM_COLS + list(cat_names)
-
     try:
         imp      = pipe.named_steps["model"].feature_importances_
-        feat_imp = pd.Series(imp, index=feat_names).sort_values(ascending=False)
     except AttributeError:
         imp      = np.abs(pipe.named_steps["model"].coef_[0])
-        feat_imp = pd.Series(imp, index=feat_names).sort_values(ascending=False)
+    feat_imp = pd.Series(imp, index=NUM_COLS).sort_values(ascending=False)
 
-    fig, ax = plt.subplots(figsize=(9, 5))
-    feat_imp.head(15).plot.barh(ax=ax, color="steelblue")
+    fig, ax = plt.subplots(figsize=(8, 4))
+    feat_imp.plot.barh(ax=ax, color="steelblue")
     ax.invert_yaxis()
-    ax.set_title(f"Top 15 Features — {name}", fontweight="bold")
+    ax.set_title(f"Feature Importances — {name}", fontweight="bold")
     ax.spines[["top", "right"]].set_visible(False)
     plt.tight_layout()
     plt.show()
-
-    print("\n── Top 10 features ──")
-    print(feat_imp.head(10).round(4))
+    print("\n── Feature importances ──\n", feat_imp.round(4))
 
 
 # ══════════════════════════════════════════════════════════════
-# 5. SAVE PREDICTIONS
+# 5. RETRAIN ON FULL TRAIN + PREDICT TEST
 # ══════════════════════════════════════════════════════════════
-def save_predictions(pipe, X_test, y_test, path: str = "predictions.csv") -> None:
-    y_proba = pipe.predict_proba(X_test)[:, 1]
-    y_pred  = pipe.predict(X_test)
-    out = X_test.copy().reset_index(drop=True)
-    out["kit_used_actual"]   = y_test.values
-    out["kit_used_predicted"] = y_pred
-    out["kit_used_proba"]     = y_proba.round(4)
-    out.to_csv(path, index=False)
-    print(f"\n✅ Predictions saved → {path}  ({len(out)} rows)")
+def make_submission(best_model_name, train, test) -> None:
+    """Retrain best model on full train set, predict test, save submission.csv."""
+    pos_weight = (train["Target"] == 0).sum() / (train["Target"] == 1).sum()
+
+    model_map = {
+        "Logistic Regression": LogisticRegression(max_iter=1000, class_weight="balanced"),
+        "Random Forest":       RandomForestClassifier(n_estimators=300, class_weight="balanced", random_state=42),
+        "Gradient Boosting":   GradientBoostingClassifier(n_estimators=300, learning_rate=0.05, max_depth=4, random_state=42),
+    }
+
+    pipe = build_pipeline(model_map[best_model_name])
+    pipe.fit(train[NUM_COLS], train["Target"])
+
+    test_pred = pipe.predict(test[NUM_COLS])
+
+    submission = pd.DataFrame({"ID": test["ID"], "Target": test_pred})
+    submission.to_csv(SUB_PATH, index=False)
+    print(f"\n✅ submission.csv saved → {SUB_PATH}")
+    print(f"   Rows: {len(submission)}  |  Predicted positives: {test_pred.sum()} ({test_pred.mean():.2%})")
+    print(submission.head(8).to_string(index=False))
 
 
 # ══════════════════════════════════════════════════════════════
@@ -242,42 +210,26 @@ def main():
     print("  Airline Medical Kit — ML Pipeline")
     print("=" * 55)
 
-    # Data
-    df = generate_dataset(n=3000)
-    print(f"\nDataset: {df.shape}  |  Target balance: {df['kit_used'].mean():.1%} used kit")
+    # Load
+    train, test = load_data()
 
-    X = df.drop(columns="kit_used")
-    y = df["kit_used"]
-    X_train, X_test, y_train, y_test = train_test_split(
+    # EDA
+    plot_eda(train)
+
+    # Split train → train / val
+    X = train[NUM_COLS]
+    y = train["Target"]
+    X_tr, X_val, y_tr, y_val = train_test_split(
         X, y, test_size=0.2, stratify=y, random_state=42
     )
 
-    # EDA
-    plot_eda(df)
-
-    # Train
-    best = train_and_evaluate(X_train, X_test, y_train, y_test)
-
-    # Evaluate
-    plot_evaluation(best["pipe"], best["name"], X_test, y_test)
+    # Train & evaluate
+    best = train_and_evaluate(X_tr, X_val, y_tr, y_val)
+    plot_evaluation(best["pipe"], best["name"], X_val, y_val)
     plot_feature_importance(best["pipe"], best["name"])
 
-    # Save
-    save_predictions(best["pipe"], X_test, y_test,
-                     path="05_ml_modeling/dataset/predictions.csv")
-
-    # Business insights
-    print("\n" + "=" * 55)
-    print("  BUSINESS INSIGHTS")
-    print("=" * 55)
-    for insight in [
-        "✅ Chronic condition → strongest predictor of kit usage",
-        "✅ Longer flights → significantly more kit usage",
-        "✅ Diabetic / Low-sodium meal → health-aware passengers",
-        "✅ Repeat buyers → already found the kit useful before",
-        "💡 Recommendation: target marketing to chronic + long-haul",
-    ]:
-        print(f"  {insight}")
+    # Retrain on full data + generate submission
+    make_submission(best["name"], train, test)
 
 
 if __name__ == "__main__":
