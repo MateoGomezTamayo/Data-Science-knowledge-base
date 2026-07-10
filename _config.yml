@@ -1,0 +1,36 @@
+# Jupyter Book configuration
+title: "📚 Data Science Knowledge Base"
+author: "Mateo Gomez Tamayo"
+logo: ""
+
+# Repository info
+repository:
+  url: https://github.com/MateoGomezTamayo/Data-Science-knowledge-base
+  branch: main
+  path_to_book: .
+
+# Launch buttons (open in Colab / Binder)
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+
+# HTML theme
+html:
+  use_issues_button: false
+  use_repository_button: true
+  use_edit_page_button: false
+  home_page_in_navbar: true
+  favicon: ""
+  extra_navbar: ""
+  google_analytics_id: ""
+
+# Execution settings — don't re-run (just render existing outputs)
+execute:
+  execute_notebooks: "off"
+
+# Sphinx / build settings
+sphinx:
+  config:
+    html_theme: "sphinx_book_theme"
+    html_theme_options:
+      show_navbar_depth: 2
+      home_page_in_toc: true

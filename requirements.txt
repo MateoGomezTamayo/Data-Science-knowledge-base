@@ -1,0 +1,7 @@
+jupyter-book>=0.15.1
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+scipy

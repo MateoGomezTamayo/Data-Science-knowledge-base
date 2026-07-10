@@ -1,0 +1,37 @@
+format: jb-book
+root: README
+
+parts:
+  - caption: "🗃️ SQL"
+    chapters:
+      - file: 01_sql/sql_advanced
+
+  - caption: "🐍 Python"
+    chapters:
+      - file: 02_python/python_advanced
+      - file: 02_python/python_ds_patterns
+
+  - caption: "📊 Statistics"
+    chapters:
+      - file: 03_statistics/statistics_advanced
+
+  - caption: "📈 Visualization"
+    chapters:
+      - file: 04_visualization/visualization_advanced
+
+  - caption: "🤖 Machine Learning"
+    chapters:
+      - file: 05_ml_modeling/ml_modeling_advanced
+
+  - caption: "🧠 Deep Learning"
+    chapters:
+      - file: 06_deep_learning/deep_learning_advanced
+
+  - caption: "🔄 ETL & Data Wrangling"
+    chapters:
+      - file: 07_etl_data_wrangling/etl_data_wrangling_advanced
+      - file: 07_etl_data_wrangling/etl_quiz_complete
+
+  - caption: "🛠️ Git & Best Practices"
+    chapters:
+      - file: 08_git_best_practices/git_best_practices_advanced
