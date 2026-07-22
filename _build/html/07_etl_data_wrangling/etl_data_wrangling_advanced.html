@@ -1,0 +1,1120 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ETL &amp; Data Wrangling — Advanced Reference &#8212; 📚 Data Science Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_etl_data_wrangling/etl_data_wrangling_advanced';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ETL — Quiz Notes &amp; Runnable Examples" href="etl_quiz_complete.html" />
+    <link rel="prev" title="Deep Learning — Advanced Reference" href="../06_deep_learning/deep_learning_advanced.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">📚 Data Science Knowledge Base</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    📚 Data Science Knowledge Base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🗃️ SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_sql/sql_advanced.html">SQL — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_advanced.html">Python — Advanced Reference for Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_ds_patterns.html">Python for Data Science — Patterns &amp; Pitfalls</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📊 Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_statistics/statistics_advanced.html">Statistics — Advanced Reference for Data Scientists</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📈 Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_visualization/visualization_advanced.html">Data Visualization — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_ml_modeling/ml_modeling_advanced.html">Machine Learning Modeling — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧠 Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_deep_learning/deep_learning_advanced.html">Deep Learning — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🔄 ETL &amp; Data Wrangling</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ETL &amp; Data Wrangling — Advanced Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="etl_quiz_complete.html">ETL — Quiz Notes &amp; Runnable Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛠️ Git &amp; Best Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_git_best_practices/git_best_practices_advanced.html">Git &amp; Best Practices — Advanced Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/07_etl_data_wrangling/etl_data_wrangling_advanced.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ETL & Data Wrangling — Advanced Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-inspection">1 · Data Loading &amp; Inspection <a id="loading"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-strategies">2 · Missing Data Strategies <a id="missing"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-detection-treatment">3 · Outlier Detection &amp; Treatment <a id="outliers"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-cleaning-parsing">4 · String Cleaning &amp; Parsing <a id="strings"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#date-time-engineering">5 · Date/Time Engineering <a id="datetime"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering-patterns">6 · Feature Engineering Patterns <a id="features"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation-with-pandera">7 · Data Validation with Pandera <a id="validation"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-pipeline-pattern">8 · ETL Pipeline Pattern <a id="pipeline"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-large-files-with-chunking-polars">9 · Performance: Large Files with Chunking &amp; Polars <a id="performance"></a></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="etl-data-wrangling-advanced-reference">
+<h1>ETL &amp; Data Wrangling — Advanced Reference<a class="headerlink" href="#etl-data-wrangling-advanced-reference" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Level:</strong> Advanced | <strong>Goal:</strong> Production-grade data cleaning, transformation, and validation pipelines</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#loading"><span class="xref myst">Data Loading &amp; Inspection</span></a></p></li>
+<li><p><a class="reference internal" href="#missing"><span class="xref myst">Missing Data Strategies</span></a></p></li>
+<li><p><a class="reference internal" href="#outliers"><span class="xref myst">Outlier Detection &amp; Treatment</span></a></p></li>
+<li><p><a class="reference internal" href="#strings"><span class="xref myst">String Cleaning &amp; Parsing</span></a></p></li>
+<li><p><a class="reference internal" href="#datetime"><span class="xref myst">Date/Time Engineering</span></a></p></li>
+<li><p><a class="reference internal" href="#features"><span class="xref myst">Feature Engineering Patterns</span></a></p></li>
+<li><p><a class="reference internal" href="#validation"><span class="xref myst">Data Validation with Pandera</span></a></p></li>
+<li><p><a class="reference internal" href="#pipeline"><span class="xref myst">ETL Pipeline Pattern</span></a></p></li>
+<li><p><a class="reference internal" href="#performance"><span class="xref myst">Performance: Large Files with Chunking &amp; Polars</span></a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span><span class="p">;</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas&quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-loading-inspection">
+<h2>1 · Data Loading &amp; Inspection <a id='loading'></a><a class="headerlink" href="#data-loading-inspection" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Build messy sample dataset ─────────────────────────────────</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;user_id&#39;</span><span class="p">:</span>      <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;Name&#39;</span><span class="p">:</span>         <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Alice Smith&#39;</span><span class="p">,</span><span class="s1">&#39;bob jones&#39;</span><span class="p">,</span><span class="s1">&#39;CAROL  WHITE &#39;</span><span class="p">,</span><span class="s1">&#39;  David Lee&#39;</span><span class="p">,</span><span class="s1">&#39;Eve&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;email&#39;</span><span class="p">:</span>        <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;alice@email.com&#39;</span><span class="p">,</span><span class="s1">&#39;bob@EMAIL.COM&#39;</span><span class="p">,</span><span class="s1">&#39;bad-email&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;carol@x.org&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;Age&#39;</span><span class="p">:</span>          <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+    <span class="s1">&#39;income&#39;</span><span class="p">:</span>       <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;gender&#39;</span><span class="p">:</span>       <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;male&#39;</span><span class="p">,</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;Other&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;signup_date&#39;</span><span class="p">:</span>  <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;2023-01-15&#39;</span><span class="p">,</span><span class="s1">&#39;01/20/2023&#39;</span><span class="p">,</span><span class="s1">&#39;2023-03-32&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;March 5, 2023&#39;</span><span class="p">,</span><span class="s1">&#39;2022-12-01&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;purchase_amt&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                             <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)),</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span>     <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Electronics&#39;</span><span class="p">,</span><span class="s1">&#39;ELECTRONICS&#39;</span><span class="p">,</span><span class="s1">&#39;electronics &#39;</span><span class="p">,</span><span class="s1">&#39;Clothing&#39;</span><span class="p">,</span><span class="s1">&#39;Food&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;rating&#39;</span><span class="p">:</span>       <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="c1"># Inject extra missing values</span>
+<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">rate</span> <span class="ow">in</span> <span class="p">[(</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">)]:</span>
+    <span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">rate</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">df_raw</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">df_raw</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Profiling function ─────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">profile</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;column&#39;</span><span class="p">:</span>       <span class="n">col</span><span class="p">,</span>
+            <span class="s1">&#39;dtype&#39;</span><span class="p">:</span>        <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+            <span class="s1">&#39;n_missing&#39;</span><span class="p">:</span>    <span class="n">s</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+            <span class="s1">&#39;pct_missing&#39;</span><span class="p">:</span>  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;n_unique&#39;</span><span class="p">:</span>     <span class="n">s</span><span class="o">.</span><span class="n">nunique</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="s1">&#39;cardinality&#39;</span><span class="p">:</span>  <span class="s1">&#39;high&#39;</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="k">else</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span><span class="s1">&#39;int32&#39;</span><span class="p">]:</span>
+            <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+                         <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">()})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;top_value&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="kc">None</span><span class="p">})</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">report</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;column&#39;</span><span class="p">)</span>
+
+<span class="n">profile</span><span class="p">(</span><span class="n">df_raw</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="missing-data-strategies">
+<h2>2 · Missing Data Strategies <a id='missing'></a><a class="headerlink" href="#missing-data-strategies" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strategy</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Drop rows</p></td>
+<td><p>&lt; 1–5% missing, row is corrupted</p></td>
+</tr>
+<tr class="row-odd"><td><p>Drop columns</p></td>
+<td><p>&gt; 40–60% missing, not informative</p></td>
+</tr>
+<tr class="row-even"><td><p>Mean/Median imputation</p></td>
+<td><p>MCAR, numeric, no time dependency</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mode imputation</p></td>
+<td><p>Categorical</p></td>
+</tr>
+<tr class="row-even"><td><p>KNN imputation</p></td>
+<td><p>Correlated features</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model-based (IterativeImputer)</p></td>
+<td><p>Complex patterns</p></td>
+</tr>
+<tr class="row-even"><td><p>Forward/Backward fill</p></td>
+<td><p>Time series</p></td>
+</tr>
+<tr class="row-odd"><td><p>Missing indicator</p></td>
+<td><p>When missingness is informative</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># ── Missing indicator + imputation ────────────────────────────</span>
+<span class="c1"># Preserve missingness signal as a feature</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_was_missing&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt_was_missing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;age_was_missing&#39;</span><span class="p">]</span>          <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Impute numerics</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span>          <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Missing after imputation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;income&#39;</span><span class="p">,</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span><span class="s1">&#39;Age&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="outlier-detection-treatment">
+<h2>3 · Outlier Detection &amp; Treatment <a id='outliers'></a><a class="headerlink" href="#outlier-detection-treatment" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_outliers</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;iqr&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return boolean mask: True = outlier.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;iqr&#39;</span><span class="p">:</span>
+        <span class="n">q1</span><span class="p">,</span> <span class="n">q3</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+        <span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">series</span> <span class="o">&lt;</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">iqr</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">series</span> <span class="o">&gt;</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">iqr</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;zscore&#39;</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">series</span> <span class="o">-</span> <span class="n">series</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">series</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">z</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;modified_zscore&#39;</span><span class="p">:</span>
+        <span class="n">median</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+        <span class="n">mad</span> <span class="o">=</span> <span class="p">(</span><span class="n">series</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+        <span class="n">mod_z</span> <span class="o">=</span> <span class="mf">0.6745</span> <span class="o">*</span> <span class="p">(</span><span class="n">series</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span> <span class="o">/</span> <span class="n">mad</span>
+        <span class="k">return</span> <span class="n">mod_z</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">3.5</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="s1">&#39;purchase_amt&#39;</span><span class="p">]:</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">detect_outliers</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="s1">&#39;iqr&#39;</span><span class="p">)</span>
+    <span class="n">pct</span>  <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> outliers (</span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Treatment options ─────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">winsorize</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clip to [p1, p99] percentile.&quot;&quot;&quot;</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_winsorized&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">winsorize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">])</span>
+
+<span class="c1"># Log transform (for right-skewed distributions)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_log&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Skewness before:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+      <span class="s2">&quot;| after log:&quot;</span><span class="p">,</span>    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_log&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="string-cleaning-parsing">
+<h2>4 · String Cleaning &amp; Parsing <a id='strings'></a><a class="headerlink" href="#string-cleaning-parsing" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Name standardization ───────────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;name_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># collapse spaces</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>                              <span class="c1"># Title Case</span>
+<span class="p">)</span>
+
+<span class="c1"># ── Email validation and normalization ─────────────────────────</span>
+<span class="n">EMAIL_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">EMAIL_REGEX</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">e</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">e</span> <span class="k">else</span> <span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_domain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_valid&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;@(.+)&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Gender harmonization ───────────────────────────────────────</span>
+<span class="n">gender_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">:</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;female&#39;</span><span class="p">:</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;Other&#39;</span>
+<span class="p">}</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span>
+                      <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                      <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                      <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">gender_map</span><span class="p">)</span>
+                      <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Unknown&#39;</span><span class="p">))</span>
+
+<span class="c1"># ── Category standardization ───────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;category_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;Electronics&#39;</span><span class="p">:</span> <span class="s1">&#39;Electronics&#39;</span><span class="p">}))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;name_clean&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">,</span><span class="s1">&#39;email_valid&#39;</span><span class="p">,</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span><span class="s1">&#39;gender_clean&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="date-time-engineering">
+<h2>5 · Date/Time Engineering <a id='datetime'></a><a class="headerlink" href="#date-time-engineering" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Parse multiple date formats robustly ──────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_date_robust</span><span class="p">(</span><span class="n">date_str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Try multiple formats; return NaT on failure.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">date_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
+    <span class="n">formats</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">,</span> <span class="s1">&#39;%b </span><span class="si">%d</span><span class="s1">, %Y&#39;</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span><span class="p">)</span>
+            <span class="c1"># Sanity check: year must be reasonable</span>
+            <span class="k">if</span> <span class="mi">2000</span> <span class="o">&lt;=</span> <span class="n">dt</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;=</span> <span class="mi">2030</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">dt</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_date_parsed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_date_robust</span><span class="p">)</span>
+<span class="n">parse_success</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_date_parsed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Date parse success rate: </span><span class="si">{</span><span class="n">parse_success</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── Date feature extraction ────────────────────────────────────</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_date_parsed&#39;</span><span class="p">]</span>
+<span class="n">reference_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_year&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_month&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_dow&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>   <span class="c1"># 0=Mon, 6=Sun</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_is_weekend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sd</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_quarter&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">sd</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">quarter</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;tenure_days&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="p">(</span><span class="n">reference_date</span> <span class="o">-</span> <span class="n">sd</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+
+<span class="c1"># ── Cyclical encoding (for models that can&#39;t handle periodicity) </span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;month_sin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_month&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;month_cos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_month&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;dow_sin&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_dow&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;dow_cos&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;signup_dow&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;signup_date&#39;</span><span class="p">,</span><span class="s1">&#39;signup_date_parsed&#39;</span><span class="p">,</span><span class="s1">&#39;tenure_days&#39;</span><span class="p">,</span><span class="s1">&#39;month_sin&#39;</span><span class="p">,</span><span class="s1">&#39;month_cos&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="feature-engineering-patterns">
+<h2>6 · Feature Engineering Patterns <a id='features'></a><a class="headerlink" href="#feature-engineering-patterns" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Binning / Bucketing ────────────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;age_group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span>
+    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;18-25&#39;</span><span class="p">,</span><span class="s1">&#39;26-35&#39;</span><span class="p">,</span><span class="s1">&#39;36-50&#39;</span><span class="p">,</span><span class="s1">&#39;51-65&#39;</span><span class="p">,</span><span class="s1">&#39;65+&#39;</span><span class="p">],</span>
+    <span class="n">right</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;income_quartile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">],</span>
+    <span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span><span class="s1">&#39;Q2&#39;</span><span class="p">,</span><span class="s1">&#39;Q3&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># ── Target encoding (mean encode) ─────────────────────────────</span>
+<span class="c1"># ⚠️ Always compute on training data only and apply to test!</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">global_mean</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">smoothing_factor</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># regularization</span>
+
+<span class="n">cat_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;category_clean&#39;</span><span class="p">]})</span>
+<span class="n">cat_mean</span>  <span class="o">=</span> <span class="n">cat_stats</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;count&#39;</span><span class="p">])</span>
+<span class="n">cat_mean</span><span class="p">[</span><span class="s1">&#39;smoothed_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">cat_mean</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">cat_mean</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">global_mean</span> <span class="o">*</span> <span class="n">smoothing_factor</span><span class="p">)</span>
+    <span class="o">/</span> <span class="p">(</span><span class="n">cat_mean</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">smoothing_factor</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;category_target_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;category_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cat_mean</span><span class="p">[</span><span class="s1">&#39;smoothed_mean&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cat_mean</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Smoothed target encoding applied.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Aggregation features (entity-level features) ──────────────</span>
+<span class="c1"># Per-user statistics from transaction-level data</span>
+<span class="n">user_stats</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">n_transactions</span>  <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+    <span class="n">total_spend</span>     <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+    <span class="n">avg_spend</span>       <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+    <span class="n">std_spend</span>       <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">),</span>
+    <span class="n">max_spend</span>       <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">),</span>
+    <span class="n">n_categories</span>    <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;category_clean&#39;</span><span class="p">,</span> <span class="s1">&#39;nunique&#39;</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;cv_spend&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;std_spend&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;avg_spend&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;spend_per_cat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;total_spend&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">user_stats</span><span class="p">[</span><span class="s1">&#39;n_categories&#39;</span><span class="p">]</span>
+
+<span class="c1"># Merge back to main dataframe</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">user_stats</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_user&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">user_stats</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2"> user-level features&quot;</span><span class="p">)</span>
+<span class="n">user_stats</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-validation-with-pandera">
+<h2>7 · Data Validation with Pandera <a id='validation'></a><a class="headerlink" href="#data-validation-with-pandera" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pandera</span><span class="w"> </span><span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">DataFrameSchema</span><span class="p">,</span> <span class="n">Check</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">DataFrameSchema</span><span class="p">({</span>
+        <span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="n">checks</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">Check</span><span class="o">.</span><span class="n">greater_than_or_equal_to</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                <span class="n">Check</span><span class="o">.</span><span class="n">less_than_or_equal_to</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span>
+            <span class="p">],</span>
+            <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;income&#39;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="n">checks</span><span class="o">=</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;purchase_amt&#39;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+            <span class="nb">float</span><span class="p">,</span>
+            <span class="n">checks</span><span class="o">=</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than_or_equal_to</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;email_valid&#39;</span><span class="p">:</span> <span class="n">Column</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])),</span>
+    <span class="p">})</span>
+
+    <span class="n">validated</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span><span class="s1">&#39;income&#39;</span><span class="p">,</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">,</span><span class="s1">&#39;email_valid&#39;</span><span class="p">]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation passed. </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">validated</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows validated.&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Install: pip install pandera&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Manual validation instead:&quot;</span><span class="p">)</span>
+
+    <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Age has negative values&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;income&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Income has non-positive values&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;email_valid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;email_valid has values outside {0,1}&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">issues</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">issues</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ISSUE: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  All manual checks passed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="etl-pipeline-pattern">
+<h2>8 · ETL Pipeline Pattern <a id='pipeline'></a><a class="headerlink" href="#etl-pipeline-pattern" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransformStep</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ETLPipeline</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Composable ETL pipeline with logging and shape tracking.</span>
+<span class="sd">    Each step receives and returns a DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TransformStep</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting pipeline. Input: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">] OK → </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">step</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">] FAILED: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pipeline complete. Output: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>
+
+<span class="c1"># ── Define steps ───────────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">step_deduplicate</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="s1">&#39;signup_date&#39;</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">step_standardize_strings</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;name_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;category_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">step_handle_missing</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;purchase_amt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">step_validate_rating</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ETLPipeline</span><span class="p">([</span>
+    <span class="n">TransformStep</span><span class="p">(</span><span class="s1">&#39;Deduplicate&#39;</span><span class="p">,</span>       <span class="n">step_deduplicate</span><span class="p">),</span>
+    <span class="n">TransformStep</span><span class="p">(</span><span class="s1">&#39;Standardize strings&#39;</span><span class="p">,</span> <span class="n">step_standardize_strings</span><span class="p">),</span>
+    <span class="n">TransformStep</span><span class="p">(</span><span class="s1">&#39;Handle missing&#39;</span><span class="p">,</span>    <span class="n">step_handle_missing</span><span class="p">),</span>
+    <span class="n">TransformStep</span><span class="p">(</span><span class="s1">&#39;Validate rating&#39;</span><span class="p">,</span>   <span class="n">step_validate_rating</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">df_raw</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="performance-large-files-with-chunking-polars">
+<h2>9 · Performance: Large Files with Chunking &amp; Polars <a id='performance'></a><a class="headerlink" href="#performance-large-files-with-chunking-polars" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+<span class="c1"># ── Chunked reading for large CSV files ───────────────────────</span>
+<span class="c1"># When file doesn&#39;t fit in memory: read + aggregate in chunks</span>
+
+<span class="c1"># Simulate a large CSV</span>
+<span class="n">large_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">),</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">),</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="mi">100_000</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="n">large_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Process in chunks</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
+    <span class="n">chunk_summary</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span><span class="s1">&#39;count&#39;</span><span class="p">])</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk_summary</span><span class="p">)</span>
+
+<span class="n">final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">final</span><span class="p">[</span><span class="s1">&#39;avg_revenue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final</span><span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">final</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chunked aggregation result:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Polars: fast DataFrame library (Rust-based) ────────────────</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">5_000_000</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;user_id&#39;</span><span class="p">:</span>  <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s1">&#39;revenue&#39;</span><span class="p">:</span>  <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Pandas</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">pd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">pd_result</span> <span class="o">=</span> <span class="n">pd_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">pd_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+    <span class="c1"># Polars</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">pl_df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">pl_result</span> <span class="o">=</span> <span class="n">pl_df</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">pl_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pandas: </span><span class="si">{</span><span class="n">pd_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s | polars: </span><span class="si">{</span><span class="n">pl_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s  (</span><span class="si">{</span><span class="n">pd_time</span><span class="o">/</span><span class="n">pl_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x speedup)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Polars lazy API (query optimization)</span>
+    <span class="n">lazy_result</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">([</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;avg_revenue&#39;</span><span class="p">),</span>
+            <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;n_transactions&#39;</span><span class="p">)</span>
+        <span class="p">])</span>
+        <span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;avg_revenue&#39;</span><span class="p">,</span> <span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">collect</span><span class="p">()</span>   <span class="c1"># executes optimized query plan</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lazy_result</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Install: pip install polars&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polars advantages:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - 5-20x faster than pandas for aggregations&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Lazy evaluation (query optimizer)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Parallel execution out of the box&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Memory efficient (Apache Arrow format)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./07_etl_data_wrangling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06_deep_learning/deep_learning_advanced.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Deep Learning — Advanced Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="etl_quiz_complete.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ETL — Quiz Notes &amp; Runnable Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-inspection">1 · Data Loading &amp; Inspection <a id="loading"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data-strategies">2 · Missing Data Strategies <a id="missing"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-detection-treatment">3 · Outlier Detection &amp; Treatment <a id="outliers"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-cleaning-parsing">4 · String Cleaning &amp; Parsing <a id="strings"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#date-time-engineering">5 · Date/Time Engineering <a id="datetime"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering-patterns">6 · Feature Engineering Patterns <a id="features"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-validation-with-pandera">7 · Data Validation with Pandera <a id="validation"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-pipeline-pattern">8 · ETL Pipeline Pattern <a id="pipeline"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-large-files-with-chunking-polars">9 · Performance: Large Files with Chunking &amp; Polars <a id="performance"></a></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mateo Gomez Tamayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

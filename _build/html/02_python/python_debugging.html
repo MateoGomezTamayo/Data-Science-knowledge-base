@@ -1,0 +1,1105 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Debugging &amp; Output Tracing &#8212; 📚 Data Science Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_python/python_debugging';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">📚 Data Science Knowledge Base</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    📚 Data Science Knowledge Base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🗃️ SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_sql/sql_advanced.html">SQL — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_advanced.html">Python — Advanced Reference for Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_ds_patterns.html">Python for Data Science — Patterns &amp; Pitfalls</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📊 Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_statistics/statistics_advanced.html">Statistics — Advanced Reference for Data Scientists</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📈 Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_visualization/visualization_advanced.html">Data Visualization — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_ml_modeling/ml_modeling_advanced.html">Machine Learning Modeling — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧠 Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_deep_learning/deep_learning_advanced.html">Deep Learning — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🔄 ETL &amp; Data Wrangling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_data_wrangling_advanced.html">ETL &amp; Data Wrangling — Advanced Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_quiz_complete.html">ETL — Quiz Notes &amp; Runnable Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛠️ Git &amp; Best Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_git_best_practices/git_best_practices_advanced.html">Git &amp; Best Practices — Advanced Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02_python/python_debugging.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Debugging & Output Tracing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-vs">1 · Operators — <code class="docutils literal notranslate"><span class="pre">^</span></code> vs <code class="docutils literal notranslate"><span class="pre">**</span></code> <a id="operators"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug">Bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fix">Fix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-table">Operator table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-indexing-in-loops">2 · String Indexing in Loops <a id="string-index"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-abc">Output: <code class="docutils literal notranslate"><span class="pre">abc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-methods-append-vs-add">3 · List Methods — <code class="docutils literal notranslate"><span class="pre">.append()</span></code> vs <code class="docutils literal notranslate"><span class="pre">.add()</span></code> <a id="list-methods"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-comparison">Method comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-first-match-wins">4 · if / elif / else — First Match Wins <a id="if-elif"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-greater-than-5">Output: <code class="docutils literal notranslate"><span class="pre">Greater</span> <span class="pre">than</span> <span class="pre">5</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-bugs-quick-reference">5 · Common Python Bugs — Quick Reference <a id="bugs"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-finding-max-min-values-their-labels">6 · pandas — Finding Max/Min Values &amp; Their Labels <a id="idxmax"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-workflow">3-step workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-liner">One-liner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-methods">Key methods</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-debugging-output-tracing">
+<h1>Python Debugging &amp; Output Tracing<a class="headerlink" href="#python-debugging-output-tracing" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Identify errors, predict outputs, and understand Python behaviour</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#operators"><span class="xref myst">Operators — <code class="docutils literal notranslate"><span class="pre">^</span></code> vs <code class="docutils literal notranslate"><span class="pre">**</span></code> (XOR vs Exponentiation)</span></a></p></li>
+<li><p><a class="reference internal" href="#string-index"><span class="xref myst">String Indexing in Loops</span></a></p></li>
+<li><p><a class="reference internal" href="#list-methods"><span class="xref myst">List Methods — <code class="docutils literal notranslate"><span class="pre">.append()</span></code> vs <code class="docutils literal notranslate"><span class="pre">.add()</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#if-elif"><span class="xref myst">if / elif / else — First Match Wins</span></a></p></li>
+<li><p><a class="reference internal" href="#bugs"><span class="xref myst">Common Python Bugs — Quick Reference</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="operators-vs">
+<h2>1 · Operators — <code class="docutils literal notranslate"><span class="pre">^</span></code> vs <code class="docutils literal notranslate"><span class="pre">**</span></code> <a id='operators'></a><a class="headerlink" href="#operators-vs" title="Link to this heading">#</a></h2>
+<section id="bug">
+<h3>Bug<a class="headerlink" href="#bug" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># ❌ ^ is bitwise XOR, not exponentiation</span>
+</pre></div>
+</div>
+</section>
+<section id="fix">
+<h3>Fix<a class="headerlink" href="#fix" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># ✅ ** is the exponentiation operator</span>
+</pre></div>
+</div>
+</section>
+<section id="operator-table">
+<h3>Operator table<a class="headerlink" href="#operator-table" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">**</span></code></p></td>
+<td><p>Exponentiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">**</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p>Bitwise XOR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">^</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">*</span></code></p></td>
+<td><p>Multiplication</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">*</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">6</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">//</span></code></p></td>
+<td><p>Floor division</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">//</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%</span></code></p></td>
+<td><p>Modulo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">%</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Why <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">1</span></code>?</strong><br />
+XOR compares bits: <code class="docutils literal notranslate"><span class="pre">011</span> <span class="pre">XOR</span> <span class="pre">010</span> <span class="pre">=</span> <span class="pre">001</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Bug: ^ is XOR, not power ────────────────────────────────────</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># ❌ Wrong — uses bitwise XOR</span>
+<span class="n">wrong</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">wrong</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span> <span class="o">^</span> <span class="mi">2</span><span class="p">)</span>     <span class="c1"># XOR with 2, not squared</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;❌ With ^  (XOR):&#39;</span><span class="p">,</span> <span class="n">wrong</span><span class="p">)</span>
+
+<span class="c1"># ✅ Correct — exponentiation</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✅ With ** (power):&#39;</span><span class="p">,</span> <span class="n">squares</span><span class="p">)</span>
+
+<span class="c1"># ✅ Pythonic version</span>
+<span class="n">squares_lc</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✅ List comprehension:&#39;</span><span class="p">,</span> <span class="n">squares_lc</span><span class="p">)</span>
+
+<span class="c1"># Proof: XOR vs power on 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">3 ^ 2  = </span><span class="si">{</span><span class="mi">3</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s1">   ← XOR (01 1 XOR 01 0 = 00 1)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;3 ** 2 = </span><span class="si">{</span><span class="mi">3</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s1">   ← exponentiation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="string-indexing-in-loops">
+<h2>2 · String Indexing in Loops <a id='string-index'></a><a class="headerlink" href="#string-indexing-in-loops" title="Link to this heading">#</a></h2>
+<section id="question">
+<h3>Question<a class="headerlink" href="#question" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;cherry&#39;</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="output-abc">
+<h3>Output: <code class="docutils literal notranslate"><span class="pre">abc</span></code><a class="headerlink" href="#output-abc" title="Link to this heading">#</a></h3>
+<p><strong>Trace:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Iteration</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">word</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">word[0]</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">result</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'apple'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'a'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'a'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'banana'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'b'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'ab'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'cherry'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'c'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'abc'</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">word[0]</span></code> accesses the <strong>first character</strong> (index 0) of each string.<br />
+<code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">+=</span> <span class="pre">char</span></code> is string concatenation — equivalent to <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">result</span> <span class="pre">+</span> <span class="pre">char</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── String indexing demo ────────────────────────────────────────</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;cherry&#39;</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  word=</span><span class="si">{</span><span class="n">word</span><span class="si">!r:</span><span class="s1">10s</span><span class="si">}</span><span class="s1">  word[0]=</span><span class="si">{</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s1">  result so far: </span><span class="si">{</span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Final output: </span><span class="si">{</span><span class="n">result</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── String index reference ─────────────────────────────────────</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">String indexing on </span><span class="si">{</span><span class="n">s</span><span class="si">!r}</span><span class="s1">:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  s[0]  = </span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s1">   ← first character&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  s[-1] = </span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">!r}</span><span class="s1">   ← last character&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  s[1:3]= </span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="si">!r}</span><span class="s1">  ← slice [start:end]&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Pythonic equivalent ────────────────────────────────────────</span>
+<span class="n">initials</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pythonic (join + generator): </span><span class="si">{</span><span class="n">initials</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="list-methods-append-vs-add">
+<h2>3 · List Methods — <code class="docutils literal notranslate"><span class="pre">.append()</span></code> vs <code class="docutils literal notranslate"><span class="pre">.add()</span></code> <a id='list-methods'></a><a class="headerlink" href="#list-methods-append-vs-add" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Bug<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">doubled_numbers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>    <span class="c1"># ❌ lists have no .add() method</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Fix<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">doubled_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># ✅ lists use .append()</span>
+</pre></div>
+</div>
+</section>
+<section id="method-comparison">
+<h3>Method comparison<a class="headerlink" href="#method-comparison" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Works on</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.append(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list</span></code> ✅</p></td>
+<td><p>Add one element to the end</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.extend([x,y])</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>Add multiple elements</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.insert(i,</span> <span class="pre">x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>Insert at position i</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.add(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>Add element to a set</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.update([x,y])</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>Add multiple elements to a set</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── .append() vs .add() ─────────────────────────────────────────</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># ❌ Wrong — lists have no .add()</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">bad_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">bad_list</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;❌ Error on list.add(): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ✅ Correct — use .append() for lists</span>
+<span class="n">doubled_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="n">doubled_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">✅ doubled_numbers: </span><span class="si">{</span><span class="n">doubled_numbers</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ✅ .add() works on SETS</span>
+<span class="n">my_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">my_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;✅ set.add() works:  </span><span class="si">{</span><span class="n">my_set</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── All list add methods ───────────────────────────────────────</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>          <span class="c1"># → [1,2,3,4]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>     <span class="c1"># → [1,2,3,4,5,6]</span>
+<span class="n">lst</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>       <span class="c1"># → [0,1,2,3,4,5,6]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">After append+extend+insert: </span><span class="si">{</span><span class="n">lst</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ✅ Pythonic</span>
+<span class="n">doubled</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;List comprehension: </span><span class="si">{</span><span class="n">doubled</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="if-elif-else-first-match-wins">
+<h2>4 · if / elif / else — First Match Wins <a id='if-elif'></a><a class="headerlink" href="#if-elif-else-first-match-wins" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Question<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Greater than 5&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Greater than 3&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;3 or less&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="output-greater-than-5">
+<h3>Output: <code class="docutils literal notranslate"><span class="pre">Greater</span> <span class="pre">than</span> <span class="pre">5</span></code><a class="headerlink" href="#output-greater-than-5" title="Link to this heading">#</a></h3>
+<p><strong>Rule: Python evaluates top-to-bottom and stops at the FIRST True condition.</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>if x &gt; 5:    ← 10 &gt; 5 = True ✅ → executes, skips everything below
+elif x &gt; 3:  ← never evaluated
+else:        ← never reached
+</pre></div>
+</div>
+<p>Even though <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">&gt;</span> <span class="pre">3</span></code> is also <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">elif</span></code> only runs if <strong>all previous conditions were <code class="docutils literal notranslate"><span class="pre">False</span></code></strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── if/elif/else: first match wins ─────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Greater than 5&#39;</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Greater than 3&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;3 or less&#39;</span>
+
+<span class="n">test_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">test_values</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x=</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">3d</span><span class="si">}</span><span class="s1">  →  </span><span class="si">{</span><span class="n">classify</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Visualise which branch is taken ───────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Detailed trace for x=10 ──&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 5  : </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> &gt; 5  = </span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s1">  ← first condition True → executes&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 3  : never evaluated (first branch already matched)&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Detailed trace for x=4 ──&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 5  : </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> &gt; 5  = </span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s1">  ← False → check next&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 3  : </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> &gt; 3  = </span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s1">  ← True  → executes&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Detailed trace for x=2 ──&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 5  : </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> &gt; 5  = </span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="si">}</span><span class="s1">  ← False&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  x &gt; 3  : </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1"> &gt; 3  = </span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s1">  ← False&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  else   : all conditions False → else executes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="common-python-bugs-quick-reference">
+<h2>5 · Common Python Bugs — Quick Reference <a id='bugs'></a><a class="headerlink" href="#common-python-bugs-quick-reference" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bug</p></th>
+<th class="head"><p>Wrong</p></th>
+<th class="head"><p>Correct</p></th>
+<th class="head"><p>Error type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Exponentiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">num^2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">num**2</span></code></p></td>
+<td><p>Wrong operator (XOR ≠ power)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Add to list</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lst.add(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lst.append(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AttributeError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Off-by-one</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">range(1,</span> <span class="pre">n+1)</span></code></p></td>
+<td><p>Missing last element</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integer division</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">2.5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">//</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">2</span></code></p></td>
+<td><p>Use <code class="docutils literal notranslate"><span class="pre">//</span></code> for floor division</p></td>
+</tr>
+<tr class="row-even"><td><p>String comparison</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Mutable default arg</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">f(lst=[])</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">f(lst=None)</span></code></p></td>
+<td><p>Shared state bug</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">=</span></code> vs <code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">==</span> <span class="pre">5</span></code></p></td>
+<td><p>Assignment in condition</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── All bugs demonstrated and fixed ────────────────────────────</span>
+
+<span class="c1"># 1. ^ is XOR, ** is power</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1. Exponentiation:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   3^2  = </span><span class="si">{</span><span class="mi">3</span><span class="o">^</span><span class="mi">2</span><span class="si">}</span><span class="s1">  (XOR)  |  3**2 = </span><span class="si">{</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span><span class="si">}</span><span class="s1">  (power)&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. list.append vs set.add</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">2. Adding to collections:&#39;</span><span class="p">)</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span> <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   list.append: </span><span class="si">{</span><span class="n">lst</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">st</span>  <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span> <span class="n">st</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>       <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   set.add:     </span><span class="si">{</span><span class="n">st</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Off-by-one</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">3. Off-by-one in range:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   range(1,5)  = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span><span class="si">}</span><span class="s1">    ← stops before 5&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   range(1,6)  = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="si">}</span><span class="s1">  ← includes 5&#39;</span><span class="p">)</span>
+
+<span class="c1"># 4. Division types</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">4. Division:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   5 / 2  = </span><span class="si">{</span><span class="mi">5</span><span class="o">/</span><span class="mi">2</span><span class="si">}</span><span class="s1">   (float division)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   5 // 2 = </span><span class="si">{</span><span class="mi">5</span><span class="o">//</span><span class="mi">2</span><span class="si">}</span><span class="s1">     (floor division)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   5 % 2  = </span><span class="si">{</span><span class="mi">5</span><span class="o">%</span><span class="mi">2</span><span class="si">}</span><span class="s1">     (modulo / remainder)&#39;</span><span class="p">)</span>
+
+<span class="c1"># 5. Mutable default argument trap</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">5. Mutable default arg bug:&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bad_append</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">lst</span><span class="o">=</span><span class="p">[]):</span>   <span class="c1"># shared across all calls!</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lst</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">good_append</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">lst</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># safe</span>
+    <span class="k">if</span> <span class="n">lst</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lst</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   bad call 1: </span><span class="si">{</span><span class="n">bad_append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   bad call 2: </span><span class="si">{</span><span class="n">bad_append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">  ← still has [1]!&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   good call1: </span><span class="si">{</span><span class="n">good_append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;   good call2: </span><span class="si">{</span><span class="n">good_append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">  ← fresh list ✅&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pandas-finding-max-min-values-their-labels">
+<h2>6 · pandas — Finding Max/Min Values &amp; Their Labels <a id='idxmax'></a><a class="headerlink" href="#pandas-finding-max-min-values-their-labels" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>Question<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><strong>Which food item has maximum sodium content?</strong></p>
+</div></blockquote>
+</section>
+<section id="step-workflow">
+<h3>3-step workflow<a class="headerlink" href="#step-workflow" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1 — Explore: find the max value</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="c1"># max    3600.0</span>
+
+<span class="c1"># Step 2 — Get the INDEX (row label) of the max</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="c1"># → 82</span>
+
+<span class="c1"># Step 3 — Look up the item name at that row</span>
+<span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">82</span><span class="p">,</span> <span class="s1">&#39;Item&#39;</span><span class="p">]</span>
+<span class="c1"># → &#39;Chicken McNuggets (40 piece)&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="one-liner">
+<h3>One-liner<a class="headerlink" href="#one-liner" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s1">&#39;Item&#39;</span><span class="p">]</span>
+<span class="c1"># → &#39;Chicken McNuggets (40 piece)&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="key-methods">
+<h3>Key methods<a class="headerlink" href="#key-methods" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Returns</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.describe()</span></code></p></td>
+<td><p>Summary stats (min, max, mean, std, %tiles)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['Sodium'].describe()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.idxmax()</span></code></p></td>
+<td><p><strong>Row index</strong> of the maximum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['Sodium'].idxmax()</span></code> → <code class="docutils literal notranslate"><span class="pre">82</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.idxmin()</span></code></p></td>
+<td><p>Row index of the minimum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['Sodium'].idxmin()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.max()</span></code></p></td>
+<td><p>The maximum value itself</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df['Sodium'].max()</span></code> → <code class="docutils literal notranslate"><span class="pre">3600.0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.at[row,</span> <span class="pre">col]</span></code></p></td>
+<td><p>Single value by row + column label</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.at[82,</span> <span class="pre">'Item']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.loc[mask,</span> <span class="pre">col]</span></code></p></td>
+<td><p>Filter rows by condition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[df.Sodium==df.Sodium.max(),</span> <span class="pre">'Item']</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Finding max item in pandas ─────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Simulate a food nutrition dataset</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Item&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="s1">&#39;Burger&#39;</span><span class="p">,</span> <span class="s1">&#39;Salad&#39;</span><span class="p">,</span> <span class="s1">&#39;Pizza&#39;</span><span class="p">,</span> <span class="s1">&#39;Fries&#39;</span><span class="p">,</span> <span class="s1">&#39;Chicken McNuggets (40 piece)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Wrap&#39;</span><span class="p">,</span> <span class="s1">&#39;Soda&#39;</span><span class="p">,</span> <span class="s1">&#39;Shake&#39;</span><span class="p">,</span> <span class="s1">&#39;Hotdog&#39;</span><span class="p">,</span> <span class="s1">&#39;Soup&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Sodium&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">950</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">860</span><span class="p">,</span> <span class="mi">620</span><span class="p">],</span>
+    <span class="s1">&#39;Calories&#39;</span><span class="p">:[</span><span class="mi">540</span><span class="p">,</span>  <span class="mi">150</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">1770</span><span class="p">,</span> <span class="mi">410</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">530</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="c1"># ── Step 1: describe() ────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;── Step 1: df[</span><span class="se">\&quot;</span><span class="s1">Sodium</span><span class="se">\&quot;</span><span class="s1">].describe() ──&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># ── Step 2: idxmax() → row index ─────────────────────────────</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Step 2: idxmax() = </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Step 3: look up the name ──────────────────────────────────</span>
+<span class="n">item</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;Item&#39;</span><span class="p">]</span>
+<span class="n">sodium</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;Sodium&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Step 3: df.at[</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s1">, </span><span class="se">\&quot;</span><span class="s1">Item</span><span class="se">\&quot;</span><span class="s1">] = </span><span class="se">\&quot;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;           Sodium content: </span><span class="si">{</span><span class="n">sodium</span><span class="si">}</span><span class="s1"> mg&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── One-liner ─────────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── One-liner ──&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sodium&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s1">&#39;Item&#39;</span><span class="p">])</span>
+
+<span class="c1"># ── idxmax vs idxmin ─────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Max and Min sodium items ──&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Most sodium : </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Sodium&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;Item&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">  (</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Sodium&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1"> mg)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Least sodium: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Sodium&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(),</span><span class="w"> </span><span class="s2">&quot;Item&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">  (</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Sodium&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s1"> mg)&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Top 3 highest sodium ─────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Top 3 highest sodium ──&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Sodium&#39;</span><span class="p">)[[</span><span class="s1">&#39;Item&#39;</span><span class="p">,</span> <span class="s1">&#39;Sodium&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators-vs">1 · Operators — <code class="docutils literal notranslate"><span class="pre">^</span></code> vs <code class="docutils literal notranslate"><span class="pre">**</span></code> <a id="operators"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bug">Bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fix">Fix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operator-table">Operator table</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-indexing-in-loops">2 · String Indexing in Loops <a id="string-index"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-abc">Output: <code class="docutils literal notranslate"><span class="pre">abc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-methods-append-vs-add">3 · List Methods — <code class="docutils literal notranslate"><span class="pre">.append()</span></code> vs <code class="docutils literal notranslate"><span class="pre">.add()</span></code> <a id="list-methods"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Bug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Fix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-comparison">Method comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-first-match-wins">4 · if / elif / else — First Match Wins <a id="if-elif"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-greater-than-5">Output: <code class="docutils literal notranslate"><span class="pre">Greater</span> <span class="pre">than</span> <span class="pre">5</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-python-bugs-quick-reference">5 · Common Python Bugs — Quick Reference <a id="bugs"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-finding-max-min-values-their-labels">6 · pandas — Finding Max/Min Values &amp; Their Labels <a id="idxmax"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-workflow">3-step workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-liner">One-liner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-methods">Key methods</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mateo Gomez Tamayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

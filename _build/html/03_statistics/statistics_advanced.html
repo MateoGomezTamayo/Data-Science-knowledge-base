@@ -1,0 +1,1265 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Statistics — Advanced Reference for Data Scientists &#8212; 📚 Data Science Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_statistics/statistics_advanced';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Visualization — Advanced Reference" href="../04_visualization/visualization_advanced.html" />
+    <link rel="prev" title="Python for Data Science — Patterns &amp; Pitfalls" href="../02_python/python_ds_patterns.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">📚 Data Science Knowledge Base</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    📚 Data Science Knowledge Base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🗃️ SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_sql/sql_advanced.html">SQL — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_advanced.html">Python — Advanced Reference for Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_ds_patterns.html">Python for Data Science — Patterns &amp; Pitfalls</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📊 Statistics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Statistics — Advanced Reference for Data Scientists</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📈 Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_visualization/visualization_advanced.html">Data Visualization — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_ml_modeling/ml_modeling_advanced.html">Machine Learning Modeling — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧠 Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_deep_learning/deep_learning_advanced.html">Deep Learning — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🔄 ETL &amp; Data Wrangling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_data_wrangling_advanced.html">ETL &amp; Data Wrangling — Advanced Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_quiz_complete.html">ETL — Quiz Notes &amp; Runnable Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛠️ Git &amp; Best Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_git_best_practices/git_best_practices_advanced.html">Git &amp; Best Practices — Advanced Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_statistics/statistics_advanced.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Statistics — Advanced Reference for Data Scientists</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">1 · Probability Distributions <a id="distributions"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics-eda">2 · Descriptive Statistics &amp; EDA <a id="descriptive"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">3 · Hypothesis Testing <a id="hypothesis"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-framework">Decision framework</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-effect-sizes">4 · Confidence Intervals &amp; Effect Sizes <a id="ci"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-testing-power-analysis">5 · A/B Testing &amp; Power Analysis <a id="ab"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">6 · Bayesian Inference <a id="bayesian"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-analysis">7 · Regression Analysis <a id="regression"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-methods">8 · Resampling Methods <a id="resampling"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-notes-hypothesis-testing-tail-types">📝 Quiz Notes — Hypothesis Testing: Tail Types <a id="tail-tests"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-answer-option-1">✅ Correct answer — Option 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-read-the-graphs">How to read the graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-hypothesis-test-types">The three hypothesis test types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value-interpretation-by-test-type">P-value interpretation by test type</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="statistics-advanced-reference-for-data-scientists">
+<h1>Statistics — Advanced Reference for Data Scientists<a class="headerlink" href="#statistics-advanced-reference-for-data-scientists" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Level:</strong> Advanced | <strong>Goal:</strong> Practical statistical reasoning with Python</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#distributions"><span class="xref myst">Probability Distributions</span></a></p></li>
+<li><p><a class="reference internal" href="#descriptive"><span class="xref myst">Descriptive Statistics &amp; EDA</span></a></p></li>
+<li><p><a class="reference internal" href="#hypothesis"><span class="xref myst">Hypothesis Testing</span></a></p></li>
+<li><p><a class="reference internal" href="#ci"><span class="xref myst">Confidence Intervals &amp; Effect Sizes</span></a></p></li>
+<li><p><a class="reference internal" href="#ab"><span class="xref myst">A/B Testing &amp; Power Analysis</span></a></p></li>
+<li><p><a class="reference internal" href="#bayesian"><span class="xref myst">Bayesian Inference</span></a></p></li>
+<li><p><a class="reference internal" href="#regression"><span class="xref myst">Regression Analysis</span></a></p></li>
+<li><p><a class="reference internal" href="#resampling"><span class="xref myst">Resampling Methods (Bootstrap &amp; Permutation)</span></a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">norm</span><span class="p">,</span> <span class="n">t</span> <span class="k">as</span> <span class="n">t_dist</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">f</span> <span class="k">as</span> <span class="n">f_dist</span><span class="p">,</span>
+    <span class="n">ttest_ind</span><span class="p">,</span> <span class="n">ttest_1samp</span><span class="p">,</span> <span class="n">ttest_rel</span><span class="p">,</span>
+    <span class="n">mannwhitneyu</span><span class="p">,</span> <span class="n">kruskal</span><span class="p">,</span> <span class="n">chi2_contingency</span><span class="p">,</span>
+    <span class="n">shapiro</span><span class="p">,</span> <span class="n">levene</span><span class="p">,</span> <span class="n">pearsonr</span><span class="p">,</span> <span class="n">spearmanr</span>
+<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span><span class="p">;</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setup complete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="probability-distributions">
+<h2>1 · Probability Distributions <a id='distributions'></a><a class="headerlink" href="#probability-distributions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Distribution</p></th>
+<th class="head"><p>Use case</p></th>
+<th class="head"><p>Key params</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Normal</p></td>
+<td><p>Continuous measurements, CLT</p></td>
+<td><p>μ, σ</p></td>
+</tr>
+<tr class="row-odd"><td><p>Log-Normal</p></td>
+<td><p>Revenue, prices, durations</p></td>
+<td><p>μ, σ</p></td>
+</tr>
+<tr class="row-even"><td><p>Poisson</p></td>
+<td><p>Event counts per interval</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr class="row-odd"><td><p>Binomial</p></td>
+<td><p>Success counts</p></td>
+<td><p>n, p</p></td>
+</tr>
+<tr class="row-even"><td><p>Exponential</p></td>
+<td><p>Time between events</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr class="row-odd"><td><p>Beta</p></td>
+<td><p>Probabilities, conversion rates</p></td>
+<td><p>α, β</p></td>
+</tr>
+<tr class="row-even"><td><p>Gamma</p></td>
+<td><p>Waiting times, aggregate amounts</p></td>
+<td><p>k, θ</p></td>
+</tr>
+<tr class="row-odd"><td><p>Uniform</p></td>
+<td><p>Random sampling baseline</p></td>
+<td><p>a, b</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── SciPy distribution API ─────────────────────────────────────</span>
+<span class="c1"># All distributions share: .pdf .cdf .ppf .rvs .stats .fit</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># height distribution</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(height &lt; 180): </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(160 &lt; height &lt; 180): </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">160</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;90th percentile: </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> cm&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean, Variance: </span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fit a distribution to data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">mu_fit</span><span class="p">,</span> <span class="n">sigma_fit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">floc</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fitted log-normal: mu=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">mu_fit</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, sigma=</span><span class="si">{</span><span class="n">sigma_fit</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Central Limit Theorem visualization ────────────────────────</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="n">population</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># skewed population</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">sample_sizes</span><span class="p">):</span>
+    <span class="n">sample_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">population</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">)]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Sample mean&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Central Limit Theorem: Exponential → Normal as n grows&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="descriptive-statistics-eda">
+<h2>2 · Descriptive Statistics &amp; EDA <a id='descriptive'></a><a class="headerlink" href="#descriptive-statistics-eda" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Rich describe() extension ──────────────────────────────────</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span>    <span class="n">rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;sessions&#39;</span><span class="p">:</span>   <span class="n">rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;converted&#39;</span><span class="p">:</span>  <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">&#39;channel&#39;</span><span class="p">:</span>    <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;organic&#39;</span><span class="p">,</span><span class="s1">&#39;paid&#39;</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">,</span><span class="s1">&#39;social&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.1</span><span class="p">])</span>
+<span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">extended_describe</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;skewness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;kurtosis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">()</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;cv&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">/</span> <span class="n">series</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># coefficient of variation</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;p95&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;p99&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.99</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;iqr&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="o">-</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">extended_describe</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Outlier detection methods ──────────────────────────────────</span>
+<span class="n">rev</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Method 1: IQR fence</span>
+<span class="n">q1</span><span class="p">,</span> <span class="n">q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">rev</span><span class="p">,</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
+<span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+<span class="n">iqr_outliers</span> <span class="o">=</span> <span class="p">(</span><span class="n">rev</span> <span class="o">&lt;</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">iqr</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">rev</span> <span class="o">&gt;</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">iqr</span><span class="p">)</span>
+
+<span class="c1"># Method 2: Z-score</span>
+<span class="n">z_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">rev</span><span class="p">))</span>
+<span class="n">z_outliers</span> <span class="o">=</span> <span class="n">z_scores</span> <span class="o">&gt;</span> <span class="mi">3</span>
+
+<span class="c1"># Method 3: Modified Z-score (robust to outliers themselves)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">rev</span><span class="p">)</span>
+<span class="n">mad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rev</span> <span class="o">-</span> <span class="n">median</span><span class="p">))</span>
+<span class="n">mod_z</span> <span class="o">=</span> <span class="mf">0.6745</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rev</span> <span class="o">-</span> <span class="n">median</span><span class="p">)</span> <span class="o">/</span> <span class="n">mad</span>
+<span class="n">modz_outliers</span> <span class="o">=</span> <span class="n">mod_z</span> <span class="o">&gt;</span> <span class="mf">3.5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IQR method:       </span><span class="si">{</span><span class="n">iqr_outliers</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> outliers (</span><span class="si">{</span><span class="n">iqr_outliers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Z-score method:   </span><span class="si">{</span><span class="n">z_outliers</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> outliers (</span><span class="si">{</span><span class="n">z_outliers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modified Z-score: </span><span class="si">{</span><span class="n">modz_outliers</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> outliers (</span><span class="si">{</span><span class="n">modz_outliers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hypothesis-testing">
+<h2>3 · Hypothesis Testing <a id='hypothesis'></a><a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h2>
+<section id="decision-framework">
+<h3>Decision framework<a class="headerlink" href="#decision-framework" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1. State H₀ (null) and H₁ (alternative)
+2. Choose significance level α (typically 0.05)
+3. Check assumptions (normality, equal variance, independence)
+4. Select test
+5. Compute p-value
+6. Decide: reject H₀ if p &lt; α
+7. Report effect size (not just p-value!)
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>When to use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>One-sample t-test</p></td>
+<td><p>Compare sample mean to known value</p></td>
+</tr>
+<tr class="row-odd"><td><p>Two-sample t-test</p></td>
+<td><p>Compare means of two independent groups</p></td>
+</tr>
+<tr class="row-even"><td><p>Paired t-test</p></td>
+<td><p>Before/after on same subjects</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mann-Whitney U</p></td>
+<td><p>Non-parametric two-group comparison</p></td>
+</tr>
+<tr class="row-even"><td><p>ANOVA / Kruskal-Wallis</p></td>
+<td><p>3+ groups</p></td>
+</tr>
+<tr class="row-odd"><td><p>Chi-square</p></td>
+<td><p>Categorical independence</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Assumption checks before t-test ───────────────────────────</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">treatment</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">108</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+
+<span class="c1"># 1. Normality — Shapiro-Wilk (use on samples &lt; 5000)</span>
+<span class="n">stat_c</span><span class="p">,</span> <span class="n">p_norm_c</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">control</span><span class="p">[:</span><span class="mi">50</span><span class="p">])</span>   <span class="c1"># Shapiro works best on ≤ 50</span>
+<span class="n">stat_t</span><span class="p">,</span> <span class="n">p_norm_t</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">treatment</span><span class="p">[:</span><span class="mi">50</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Normality — Control: p=</span><span class="si">{</span><span class="n">p_norm_c</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Treatment: p=</span><span class="si">{</span><span class="n">p_norm_t</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. Equal variances — Levene&#39;s test</span>
+<span class="n">stat_l</span><span class="p">,</span> <span class="n">p_levene</span> <span class="o">=</span> <span class="n">levene</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">treatment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Equal variances — Levene p=</span><span class="si">{</span><span class="n">p_levene</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Run appropriate test</span>
+<span class="n">equal_var</span> <span class="o">=</span> <span class="n">p_levene</span> <span class="o">&gt;</span> <span class="mf">0.05</span>
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">treatment</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="n">equal_var</span><span class="p">)</span>
+
+<span class="c1"># 4. Effect size — Cohen&#39;s d</span>
+<span class="n">pooled_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">control</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">treatment</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cohens_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">treatment</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">control</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">pooled_std</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Two-sample t-test (Welch=</span><span class="si">{</span><span class="ow">not</span><span class="w"> </span><span class="n">equal_var</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  t=</span><span class="si">{</span><span class="n">stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">p_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Effect size (Cohen&#39;s d) = </span><span class="si">{</span><span class="n">cohens_d</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Interpretation: </span><span class="si">{</span><span class="s1">&#39;small&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">cohens_d</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;medium&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">cohens_d</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;large&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Chi-square test of independence ────────────────────────────</span>
+<span class="c1"># Does conversion rate differ by channel?</span>
+<span class="n">contingency</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;converted&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">contingency</span><span class="p">)</span>
+
+<span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_chi</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">χ²=</span><span class="si">{</span><span class="n">chi2_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, df=</span><span class="si">{</span><span class="n">dof</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">p_chi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cramér&#39;s V (effect size for chi-square)</span>
+<span class="n">n_total</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">cramers_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">chi2_stat</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_total</span> <span class="o">*</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">contingency</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cramér&#39;s V = </span><span class="si">{</span><span class="n">cramers_v</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  (0=no assoc, 1=perfect assoc)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="confidence-intervals-effect-sizes">
+<h2>4 · Confidence Intervals &amp; Effect Sizes <a id='ci'></a><a class="headerlink" href="#confidence-intervals-effect-sizes" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── CI for mean (t-distribution) ──────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ci_mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">se</span> <span class="o">*</span> <span class="n">t_dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">confidence</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">h</span>
+
+<span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">ci_mean</span><span class="p">(</span><span class="n">treatment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Treatment mean 95% CI: [</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+<span class="c1"># ── CI for proportion ─────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ci_proportion</span><span class="p">(</span><span class="n">successes</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wilson score interval — more accurate than normal approx.&quot;&quot;&quot;</span>
+    <span class="n">p_hat</span> <span class="o">=</span> <span class="n">successes</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">confidence</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_hat</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="n">half</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_hat</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_hat</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">denominator</span>
+    <span class="k">return</span> <span class="n">center</span> <span class="o">-</span> <span class="n">half</span><span class="p">,</span> <span class="n">center</span> <span class="o">+</span> <span class="n">half</span>
+
+<span class="n">conversions</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;converted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">lo_p</span><span class="p">,</span> <span class="n">hi_p</span> <span class="o">=</span> <span class="n">ci_proportion</span><span class="p">(</span><span class="n">conversions</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conversion rate 95% CI: [</span><span class="si">{</span><span class="n">lo_p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hi_p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="a-b-testing-power-analysis">
+<h2>5 · A/B Testing &amp; Power Analysis <a id='ab'></a><a class="headerlink" href="#a-b-testing-power-analysis" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">min_sample_size</span><span class="p">(</span>
+    <span class="n">baseline_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">mde</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>           <span class="c1"># minimum detectable effect (relative)</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">power</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.80</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sample size per variant for a two-proportion z-test.&quot;&quot;&quot;</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">baseline_rate</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">baseline_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mde</span><span class="p">)</span>
+    <span class="n">z_alpha</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># two-tailed</span>
+    <span class="n">z_beta</span>  <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+    <span class="n">pooled_p</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">((</span><span class="n">z_alpha</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pooled_p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pooled_p</span><span class="p">))</span> <span class="o">+</span>
+          <span class="n">z_beta</span>  <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p2</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+<span class="c1"># How many users per variant for a 10% lift on 5% baseline?</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">min_sample_size</span><span class="p">(</span><span class="n">baseline_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mde</span><span class="o">=</span><span class="mf">0.10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Required sample size per variant: </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Sensitivity analysis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample size vs MDE:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">mde</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  MDE=</span><span class="si">{</span><span class="n">mde</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">min_sample_size</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">mde</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> per variant&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Full A/B test analysis ─────────────────────────────────────</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_a</span><span class="p">,</span> <span class="n">n_b</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span>
+<span class="n">conv_a</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">n_a</span><span class="p">)</span>
+<span class="n">conv_b</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.055</span><span class="p">,</span> <span class="n">n_b</span><span class="p">)</span>  <span class="c1"># 10% lift</span>
+
+<span class="c1"># Observed</span>
+<span class="n">p_a</span> <span class="o">=</span> <span class="n">conv_a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">p_b</span> <span class="o">=</span> <span class="n">conv_b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">relative_lift</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_b</span> <span class="o">-</span> <span class="n">p_a</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_a</span>
+
+<span class="c1"># Two-proportion z-test</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.proportion</span><span class="w"> </span><span class="kn">import</span> <span class="n">proportions_ztest</span><span class="p">,</span> <span class="n">proportion_confint</span>
+
+<span class="n">stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">proportions_ztest</span><span class="p">([</span><span class="n">conv_b</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">conv_a</span><span class="o">.</span><span class="n">sum</span><span class="p">()],</span> <span class="p">[</span><span class="n">n_b</span><span class="p">,</span> <span class="n">n_a</span><span class="p">])</span>
+<span class="n">ci_a</span> <span class="o">=</span> <span class="n">proportion_confint</span><span class="p">(</span><span class="n">conv_a</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">n_a</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;wilson&#39;</span><span class="p">)</span>
+<span class="n">ci_b</span> <span class="o">=</span> <span class="n">proportion_confint</span><span class="p">(</span><span class="n">conv_b</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">n_b</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;wilson&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control   CR: </span><span class="si">{</span><span class="n">p_a</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">  95% CI [</span><span class="si">{</span><span class="n">ci_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci_a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Treatment CR: </span><span class="si">{</span><span class="n">p_b</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">  95% CI [</span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative lift: </span><span class="si">{</span><span class="n">relative_lift</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;z=</span><span class="si">{</span><span class="n">stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">p_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: </span><span class="si">{</span><span class="s1">&#39;Reject H₀ — significant lift&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p_val</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Fail to reject H₀&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="bayesian-inference">
+<h2>6 · Bayesian Inference <a id='bayesian'></a><a class="headerlink" href="#bayesian-inference" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">beta</span> <span class="k">as</span> <span class="n">beta_dist</span>
+
+<span class="c1"># ── Beta-Binomial model for conversion rates ───────────────────</span>
+<span class="c1"># Prior: Beta(α₀, β₀) — uninformative: α=β=1 (uniform)</span>
+<span class="n">alpha_prior</span><span class="p">,</span> <span class="n">beta_prior</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+
+<span class="c1"># Data</span>
+<span class="n">successes_a</span><span class="p">,</span> <span class="n">trials_a</span> <span class="o">=</span> <span class="n">conv_a</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">n_a</span>
+<span class="n">successes_b</span><span class="p">,</span> <span class="n">trials_b</span> <span class="o">=</span> <span class="n">conv_b</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">n_b</span>
+
+<span class="c1"># Posterior: Beta(α₀ + successes, β₀ + failures)</span>
+<span class="n">post_a</span> <span class="o">=</span> <span class="n">beta_dist</span><span class="p">(</span><span class="n">alpha_prior</span> <span class="o">+</span> <span class="n">successes_a</span><span class="p">,</span> <span class="n">beta_prior</span> <span class="o">+</span> <span class="n">trials_a</span> <span class="o">-</span> <span class="n">successes_a</span><span class="p">)</span>
+<span class="n">post_b</span> <span class="o">=</span> <span class="n">beta_dist</span><span class="p">(</span><span class="n">alpha_prior</span> <span class="o">+</span> <span class="n">successes_b</span><span class="p">,</span> <span class="n">beta_prior</span> <span class="o">+</span> <span class="n">trials_b</span> <span class="o">-</span> <span class="n">successes_b</span><span class="p">)</span>
+
+<span class="c1"># P(B &gt; A) via Monte Carlo</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">samples_a</span> <span class="o">=</span> <span class="n">post_a</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">samples_b</span> <span class="o">=</span> <span class="n">post_b</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">prob_b_better</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples_b</span> <span class="o">&gt;</span> <span class="n">samples_a</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># 95% Credible Intervals</span>
+<span class="n">ci_a_bayes</span> <span class="o">=</span> <span class="n">post_a</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">])</span>
+<span class="n">ci_b_bayes</span> <span class="o">=</span> <span class="n">post_b</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(B &gt; A) = </span><span class="si">{</span><span class="n">prob_b_better</span><span class="si">:</span><span class="s2">.3%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A posterior 95% CI: </span><span class="si">{</span><span class="n">ci_a_bayes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;B posterior 95% CI: </span><span class="si">{</span><span class="n">ci_b_bayes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Expected uplift</span>
+<span class="n">uplift_samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">samples_b</span> <span class="o">-</span> <span class="n">samples_a</span><span class="p">)</span> <span class="o">/</span> <span class="n">samples_a</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected relative uplift: </span><span class="si">{</span><span class="n">uplift_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">  (95% CI: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">uplift_samples</span><span class="p">,[</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">97.5</span><span class="p">])</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="regression-analysis">
+<h2>7 · Regression Analysis <a id='regression'></a><a class="headerlink" href="#regression-analysis" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">het_breuschpagan</span>
+
+<span class="c1"># ── OLS regression with full diagnostics ──────────────────────</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_obs</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">X_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">:</span>        <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">),</span>
+    <span class="s1">&#39;experience&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">),</span>
+    <span class="s1">&#39;education&#39;</span><span class="p">:</span>  <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">n_obs</span><span class="p">),</span>
+<span class="p">})</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
+<span class="n">salary</span> <span class="o">=</span> <span class="mi">30000</span> <span class="o">+</span> <span class="mi">500</span><span class="o">*</span><span class="n">X_raw</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2000</span><span class="o">*</span><span class="n">X_raw</span><span class="p">[</span><span class="s1">&#39;experience&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1500</span><span class="o">*</span><span class="n">X_raw</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_raw</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">salary</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Residual diagnostics ───────────────────────────────────────</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">resid</span>
+<span class="n">fitted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># 1. Residuals vs Fitted</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">fitted</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Residuals vs Fitted&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitted&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Q-Q plot</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Q-Q Plot (Normality)&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Scale-Location (homoscedasticity)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">fitted</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residuals</span><span class="p">)),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Scale-Location&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Fitted&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;√|Residuals|&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Breusch-Pagan test for heteroscedasticity</span>
+<span class="n">bp_stat</span><span class="p">,</span> <span class="n">bp_p</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Breusch-Pagan test: stat=</span><span class="si">{</span><span class="n">bp_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">bp_p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Homoscedasticity: </span><span class="si">{</span><span class="s1">&#39;OK&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">bp_p</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;VIOLATION&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resampling-methods">
+<h2>8 · Resampling Methods <a id='resampling'></a><a class="headerlink" href="#resampling-methods" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Bootstrap CI for any statistic ────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bootstrap_ci</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">statistic</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">n_boot</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Non-parametric bootstrap confidence interval.&quot;&quot;&quot;</span>
+    <span class="n">rng_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">boot_stats</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">statistic</span><span class="p">(</span><span class="n">rng_b</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_boot</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ci</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">boot_stats</span><span class="p">,</span> <span class="p">[</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">statistic</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">boot_stats</span>
+
+<span class="n">observed_rev</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">mean_obs</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">bootstrap_ci</span><span class="p">(</span><span class="n">observed_rev</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<span class="n">med_obs</span><span class="p">,</span>  <span class="n">lo_m</span><span class="p">,</span> <span class="n">hi_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">bootstrap_ci</span><span class="p">(</span><span class="n">observed_rev</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean   = </span><span class="si">{</span><span class="n">mean_obs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  95% Bootstrap CI: [</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median = </span><span class="si">{</span><span class="n">med_obs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  95% Bootstrap CI: [</span><span class="si">{</span><span class="n">lo_m</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hi_m</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Permutation test (model-free hypothesis test) ──────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">permutation_test</span><span class="p">(</span><span class="n">group_a</span><span class="p">,</span> <span class="n">group_b</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test if two groups have different means using permutation.&quot;&quot;&quot;</span>
+    <span class="n">rng_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">observed_diff</span> <span class="o">=</span> <span class="n">group_b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">group_a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">group_a</span><span class="p">,</span> <span class="n">group_b</span><span class="p">])</span>
+    <span class="n">n_a</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">group_a</span><span class="p">)</span>
+
+    <span class="n">perm_diffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="p">(</span><span class="n">perm</span> <span class="o">:=</span> <span class="n">rng_p</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">combined</span><span class="p">))[:</span><span class="n">n_a</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">perm</span><span class="p">[</span><span class="n">n_a</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)</span>
+    <span class="p">])</span>
+    <span class="n">p_val</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">perm_diffs</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">observed_diff</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">observed_diff</span><span class="p">,</span> <span class="n">p_val</span>
+
+<span class="n">obs_diff</span><span class="p">,</span> <span class="n">perm_p</span> <span class="o">=</span> <span class="n">permutation_test</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">treatment</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observed difference: </span><span class="si">{</span><span class="n">obs_diff</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Permutation p-value: </span><span class="si">{</span><span class="n">perm_p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="quiz-notes-hypothesis-testing-tail-types">
+<h2>📝 Quiz Notes — Hypothesis Testing: Tail Types <a id='tail-tests'></a><a class="headerlink" href="#quiz-notes-hypothesis-testing-tail-types" title="Link to this heading">#</a></h2>
+<section id="question">
+<h3>Question<a class="headerlink" href="#question" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>Ben is given three graphs, each with a shaded (red) area labelled A, B, or C.<br />
+Which statements correctly describe each graph?</p>
+</div></blockquote>
+</section>
+<section id="correct-answer-option-1">
+<h3>✅ Correct answer — Option 1<a class="headerlink" href="#correct-answer-option-1" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Graph</p></th>
+<th class="head"><p>Shaded area</p></th>
+<th class="head"><p>Test type</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(H_a\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1 — A</strong></p></td>
+<td><p>Right tail</p></td>
+<td><p>Right-tailed (one-sided)</p></td>
+<td><p><span class="math notranslate nohighlight">\(H_a: \mu &gt; value\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2 — B</strong></p></td>
+<td><p>Left tail</p></td>
+<td><p>Left-tailed (one-sided)</p></td>
+<td><p><span class="math notranslate nohighlight">\(H_a: \mu &lt; value\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3 — C</strong></p></td>
+<td><p>Both tails</p></td>
+<td><p>Two-tailed</p></td>
+<td><p><span class="math notranslate nohighlight">\(H_a: \mu \neq value\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-to-read-the-graphs">
+<h3>How to read the graphs<a class="headerlink" href="#how-to-read-the-graphs" title="Link to this heading">#</a></h3>
+<p>The <strong>shaded area represents the rejection region</strong> — where, if the test statistic falls, you reject <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Right-tail (Graph 1):          Left-tail (Graph 2):         Two-tail (Graph 3):
+
+     ___                              ___                        ___
+    /   \                            /   \                      /   \
+   /     \     ░░░░             ░░░░/     \                 ░░░/     \░░░
+──/───────\─────────           ──────────/──────           ──/─────────\──
+           0    →                      ←  0                    ←  0  →
+  H_a: μ &gt; value               H_a: μ &lt; value             H_a: μ ≠ value
+</pre></div>
+</div>
+</section>
+<section id="the-three-hypothesis-test-types">
+<h3>The three hypothesis test types<a class="headerlink" href="#the-three-hypothesis-test-types" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>When to use</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(H_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(H_a\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\alpha\)</span> split</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Right-tailed</strong></p></td>
+<td><p>Testing if mean is <strong>greater than</strong> a value</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu \leq value\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu &gt; value\)</span></p></td>
+<td><p>All <span class="math notranslate nohighlight">\(\alpha\)</span> in right tail</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Left-tailed</strong></p></td>
+<td><p>Testing if mean is <strong>less than</strong> a value</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu \geq value\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu &lt; value\)</span></p></td>
+<td><p>All <span class="math notranslate nohighlight">\(\alpha\)</span> in left tail</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Two-tailed</strong></p></td>
+<td><p>Testing if mean is <strong>different from</strong> a value</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu = value\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu \neq value\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha/2\)</span> in each tail</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="p-value-interpretation-by-test-type">
+<h3>P-value interpretation by test type<a class="headerlink" href="#p-value-interpretation-by-test-type" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Right-tail:   p-value = P(Z ≥ z_observed)
+Left-tail:    p-value = P(Z ≤ z_observed)
+Two-tail:     p-value = 2 × P(Z ≥ |z_observed|)
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Rule:</strong> If <span class="math notranslate nohighlight">\(p\text{-value} &lt; \alpha\)</span> → reject <span class="math notranslate nohighlight">\(H_0\)</span>, evidence supports <span class="math notranslate nohighlight">\(H_a\)</span></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Tail tests visualized ──────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">titles</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Graph 1 — Right-tail</span><span class="se">\n</span><span class="s1">$H_a: </span><span class="se">\\</span><span class="s1">mu &gt; value$&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Graph 2 — Left-tail</span><span class="se">\n</span><span class="s1">$H_a: </span><span class="se">\\</span><span class="s1">mu &lt; value$&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Graph 3 — Two-tail</span><span class="se">\n</span><span class="s1">$H_a: </span><span class="se">\\</span><span class="s1">mu </span><span class="se">\\</span><span class="s1">neq value$&#39;</span><span class="p">]</span>
+<span class="n">colors</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="s1">&#39;crimson&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">titles</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Test statistic&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;0 (μ₀)&#39;</span><span class="p">])</span>
+
+<span class="c1"># Right-tail</span>
+<span class="n">z_right</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">z_right</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;α=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">z_right</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;z_crit=</span><span class="si">{</span><span class="n">z_right</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">z_right</span><span class="o">+</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Left-tail</span>
+<span class="n">z_left</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">z_left</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;α=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">z_left</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;z_crit=</span><span class="si">{</span><span class="n">z_left</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">z_left</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Two-tail</span>
+<span class="n">z_two</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">z_two</span><span class="p">),</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;α/2=</span><span class="si">{</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">z_two</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span> <span class="n">z_two</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">-</span><span class="n">z_two</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;z_crit=±</span><span class="si">{</span><span class="n">z_two</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">z_two</span><span class="o">+</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">z_two</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Hypothesis Test Types — Rejection Regions (α = 0.05)&#39;</span><span class="p">,</span> 
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># ── P-value calculation example ───────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;── P-value examples for z = 1.8 ──&quot;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mf">1.8</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Right-tail:  p = P(Z ≥ </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Left-tail:   p = P(Z ≤ </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Two-tail:    p = 2×P(Z ≥ |</span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">|) = </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  α = 0.05 → reject H₀ if p &lt; 0.05&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Right-tail: </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &lt; 0.05? </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_statistics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../02_python/python_ds_patterns.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Python for Data Science — Patterns &amp; Pitfalls</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../04_visualization/visualization_advanced.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Visualization — Advanced Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">1 · Probability Distributions <a id="distributions"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-statistics-eda">2 · Descriptive Statistics &amp; EDA <a id="descriptive"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">3 · Hypothesis Testing <a id="hypothesis"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-framework">Decision framework</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-effect-sizes">4 · Confidence Intervals &amp; Effect Sizes <a id="ci"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-testing-power-analysis">5 · A/B Testing &amp; Power Analysis <a id="ab"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference">6 · Bayesian Inference <a id="bayesian"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-analysis">7 · Regression Analysis <a id="regression"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resampling-methods">8 · Resampling Methods <a id="resampling"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-notes-hypothesis-testing-tail-types">📝 Quiz Notes — Hypothesis Testing: Tail Types <a id="tail-tests"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question">Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-answer-option-1">✅ Correct answer — Option 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-read-the-graphs">How to read the graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-hypothesis-test-types">The three hypothesis test types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#p-value-interpretation-by-test-type">P-value interpretation by test type</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mateo Gomez Tamayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

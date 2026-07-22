@@ -1,0 +1,1301 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ETL / Data Wrangling — Reference &amp; Quiz Notes &#8212; 📚 Data Science Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_etl_data_wrangling/etl_quiz_notes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">📚 Data Science Knowledge Base</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    📚 Data Science Knowledge Base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🗃️ SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_sql/sql_advanced.html">SQL — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_advanced.html">Python — Advanced Reference for Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_ds_patterns.html">Python for Data Science — Patterns &amp; Pitfalls</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📊 Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_statistics/statistics_advanced.html">Statistics — Advanced Reference for Data Scientists</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📈 Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_visualization/visualization_advanced.html">Data Visualization — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_ml_modeling/ml_modeling_advanced.html">Machine Learning Modeling — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧠 Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_deep_learning/deep_learning_advanced.html">Deep Learning — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🔄 ETL &amp; Data Wrangling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="etl_data_wrangling_advanced.html">ETL &amp; Data Wrangling — Advanced Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="etl_quiz_complete.html">ETL — Quiz Notes &amp; Runnable Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛠️ Git &amp; Best Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_git_best_practices/git_best_practices_advanced.html">Git &amp; Best Practices — Advanced Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/07_etl_data_wrangling/etl_quiz_notes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ETL / Data Wrangling — Reference & Quiz Notes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-etl">1 · What is ETL? <a id="etl-intro"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-sources-extract">Common data sources (Extract)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-vs-elt">2 · ETL vs ELT <a id="etl-vs-elt"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-for-etl">3 · Data Sources for ETL <a id="sources"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-question">Quiz question</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-testing">4 · ETL Testing <a id="testing"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-testing-checklist">ETL testing checklist</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-loads">5 · Incremental Loads <a id="incremental"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-load-strategies">Incremental load strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-replacement-pipeline">6 · Outlier Replacement Pipeline <a id="outliers"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task">Task</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-streaming-etl">7 · Kafka Streaming ETL <a id="kafka"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-kafka-concepts">Key Kafka concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-in-etl-join-aggregation">8 · SQL in ETL — JOIN &amp; Aggregation <a id="sql-etl"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-etl-sql-patterns">Common ETL SQL patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-python-etl-pipeline">9 · Full Python ETL Pipeline <a id="full-pipeline"></a></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="etl-data-wrangling-reference-quiz-notes">
+<h1>ETL / Data Wrangling — Reference &amp; Quiz Notes<a class="headerlink" href="#etl-data-wrangling-reference-quiz-notes" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Level:</strong> Intermediate | <strong>Goal:</strong> Master ETL concepts, pipelines, testing, and Python implementation</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#etl-intro"><span class="xref myst">What is ETL?</span></a></p></li>
+<li><p><a class="reference internal" href="#etl-vs-elt"><span class="xref myst">ETL vs ELT</span></a></p></li>
+<li><p><a class="reference internal" href="#sources"><span class="xref myst">Data Sources for ETL</span></a></p></li>
+<li><p><a class="reference internal" href="#testing"><span class="xref myst">ETL Testing</span></a></p></li>
+<li><p><a class="reference internal" href="#incremental"><span class="xref myst">Incremental Loads</span></a></p></li>
+<li><p><a class="reference internal" href="#outliers"><span class="xref myst">Outlier Replacement Pipeline</span></a></p></li>
+<li><p><a class="reference internal" href="#kafka"><span class="xref myst">Kafka Streaming ETL</span></a></p></li>
+<li><p><a class="reference internal" href="#sql-etl"><span class="xref myst">SQL in ETL — JOIN &amp; Aggregation</span></a></p></li>
+<li><p><a class="reference internal" href="#full-pipeline"><span class="xref myst">Full Python ETL Pipeline</span></a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Setup complete ✅&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-is-etl">
+<h2>1 · What is ETL? <a id='etl-intro'></a><a class="headerlink" href="#what-is-etl" title="Link to this heading">#</a></h2>
+<p><strong>ETL = Extract → Transform → Load</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phase</p></th>
+<th class="head"><p>What happens</p></th>
+<th class="head"><p>Tools</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Extract</strong></p></td>
+<td><p>Pull raw data from source systems</p></td>
+<td><p>SQL, APIs, file readers, Kafka consumers</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Transform</strong></p></td>
+<td><p>Clean, reshape, validate, enrich</p></td>
+<td><p>pandas, dbt, Spark, KStreams</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Load</strong></p></td>
+<td><p>Write processed data to target</p></td>
+<td><p>DB inserts, Parquet writes, warehouse loaders</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="common-data-sources-extract">
+<h3>Common data sources (Extract)<a class="headerlink" href="#common-data-sources-extract" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Common?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Flat files</strong></p></td>
+<td><p>CSV, JSON, XML, Parquet</p></td>
+<td><p>✅ Very common</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Relational databases</strong></p></td>
+<td><p>PostgreSQL, MySQL, SQLite</p></td>
+<td><p>✅ Very common</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Web pages</strong></p></td>
+<td><p>Web scraping, HTML</p></td>
+<td><p>✅ Common</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>APIs</strong></p></td>
+<td><p>REST, GraphQL</p></td>
+<td><p>✅ Very common</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Message queues</strong></p></td>
+<td><p>Kafka, RabbitMQ</p></td>
+<td><p>✅ Streaming</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data warehouses</strong></p></td>
+<td><p>Snowflake, BigQuery</p></td>
+<td><p>❌ <strong>Not a source — this is the TARGET</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>📝 <strong>Quiz answer:</strong> Data warehouses are <strong>NOT</strong> a common source for ETL — they are the <strong>destination</strong>.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="etl-vs-elt">
+<h2>2 · ETL vs ELT <a id='etl-vs-elt'></a><a class="headerlink" href="#etl-vs-elt" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>ETL</p></th>
+<th class="head"><p>ELT</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Order</strong></p></td>
+<td><p>Extract → Transform → Load</p></td>
+<td><p>Extract → Load → Transform</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Where transform happens</strong></p></td>
+<td><p>Before loading (staging area)</p></td>
+<td><p>Inside the data warehouse</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Best for</strong></p></td>
+<td><p>Legacy systems, sensitive data</p></td>
+<td><p>Cloud DWH (BigQuery, Snowflake, Redshift)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Tools</strong></p></td>
+<td><p>Informatica, Talend, pandas</p></td>
+<td><p>dbt, Spark SQL, BigQuery SQL</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ETL:  [Source] → Extract → Transform (staging) → Load → [Data Warehouse]
+ELT:  [Source] → Extract → Load (raw) → [Data Warehouse] → Transform (SQL)
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-sources-for-etl">
+<h2>3 · Data Sources for ETL <a id='sources'></a><a class="headerlink" href="#data-sources-for-etl" title="Link to this heading">#</a></h2>
+<section id="quiz-question">
+<h3>Quiz question<a class="headerlink" href="#quiz-question" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“Which is NOT a common data source to feed an ETL?”</em><br />
+✅ <strong>Data warehouses</strong> — DWH is the <strong>target/destination</strong>, not the source</p>
+</div></blockquote>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source type</p></th>
+<th class="head"><p>Read with</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CSV / flat files</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code></p></td>
+<td><p>Sales exports, logs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Relational DB</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_sql()</span></code> / <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code></p></td>
+<td><p>Production DB tables</p></td>
+</tr>
+<tr class="row-even"><td><p>JSON / APIs</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_json()</span></code> / <code class="docutils literal notranslate"><span class="pre">requests</span></code></p></td>
+<td><p>REST API responses</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parquet</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_parquet()</span></code></p></td>
+<td><p>Data lake files</p></td>
+</tr>
+<tr class="row-even"><td><p>Excel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code></p></td>
+<td><p>Business reports</p></td>
+</tr>
+<tr class="row-odd"><td><p>Web scraping</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> / <code class="docutils literal notranslate"><span class="pre">Scrapy</span></code></p></td>
+<td><p>HTML pages</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Reading from multiple source types ─────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># 1. From CSV string (simulating a flat file)</span>
+<span class="n">csv_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;order_id,date,revenue</span>
+<span class="s2">1001,2024-01-05,250.0</span>
+<span class="s2">1002,2024-01-06,180.5</span>
+<span class="s2">1003,2024-01-07,320.0&quot;&quot;&quot;</span>
+<span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">csv_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;── From flat file (CSV) ──&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_csv</span><span class="p">)</span>
+
+<span class="c1"># 2. From JSON (simulating an API response)</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="s1">&#39;[{&quot;order_id&quot;:1001,&quot;product&quot;:&quot;Laptop&quot;,&quot;qty&quot;:2},{&quot;order_id&quot;:1002,&quot;product&quot;:&quot;Mouse&quot;,&quot;qty&quot;:5}]&#39;</span>
+<span class="n">df_json</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">json_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;── From JSON / API ──&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_json</span><span class="p">)</span>
+
+<span class="c1"># 3. From relational database (SQLite)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;:memory:&#39;</span><span class="p">)</span>
+<span class="n">df_csv</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="n">df_db</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM orders WHERE revenue &gt; 200&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;── From relational DB (SQLite) ──&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_db</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="etl-testing">
+<h2>4 · ETL Testing <a id='testing'></a><a class="headerlink" href="#etl-testing" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Quiz question<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“Which are the main purposes of ETL testing?”</em><br />
+✅ <strong>All of the above:</strong></p>
+<ol class="arabic simple">
+<li><p>Verify the <strong>accuracy and completeness</strong> of data in the target system</p></li>
+<li><p>Validate the <strong>functionality and performance</strong> of ETL tools and technologies</p></li>
+<li><p>Check the <strong>quality and consistency</strong> of data throughout the ETL process</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="etl-testing-checklist">
+<h3>ETL testing checklist<a class="headerlink" href="#etl-testing-checklist" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test type</p></th>
+<th class="head"><p>What it checks</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Completeness</strong></p></td>
+<td><p>All rows transferred</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len(source)</span> <span class="pre">==</span> <span class="pre">len(target)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Accuracy</strong></p></td>
+<td><p>Values are correct</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">source['revenue'].sum()</span> <span class="pre">==</span> <span class="pre">target['revenue'].sum()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Consistency</strong></p></td>
+<td><p>No duplicates</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">target['order_id'].is_unique</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Validity</strong></p></td>
+<td><p>No nulls in required fields</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">target['order_id'].notna().all()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Referential integrity</strong></p></td>
+<td><p>FK values exist in parent</p></td>
+<td><p>All <code class="docutils literal notranslate"><span class="pre">customer_id</span></code> values exist in customers table</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Performance</strong></p></td>
+<td><p>Pipeline runs within SLA</p></td>
+<td><p>Time the pipeline run</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── ETL testing framework ───────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_etl_tests</span><span class="p">(</span><span class="n">source_df</span><span class="p">,</span> <span class="n">target_df</span><span class="p">,</span> <span class="n">id_col</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">value_col</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a suite of ETL data quality tests.&quot;&quot;&quot;</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># 1. Completeness</span>
+    <span class="n">tests</span><span class="p">[</span><span class="s1">&#39;row_count_match&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_df</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_df</span><span class="p">)</span>
+
+    <span class="c1"># 2. Accuracy — numeric totals match</span>
+    <span class="k">if</span> <span class="n">value_col</span> <span class="ow">in</span> <span class="n">source_df</span> <span class="ow">and</span> <span class="n">value_col</span> <span class="ow">in</span> <span class="n">target_df</span><span class="p">:</span>
+        <span class="n">tests</span><span class="p">[</span><span class="s1">&#39;revenue_sum_match&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span>
+            <span class="n">source_df</span><span class="p">[</span><span class="n">value_col</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">target_df</span><span class="p">[</span><span class="n">value_col</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
+
+    <span class="c1"># 3. Consistency — no duplicates</span>
+    <span class="k">if</span> <span class="n">id_col</span> <span class="ow">in</span> <span class="n">target_df</span><span class="p">:</span>
+        <span class="n">tests</span><span class="p">[</span><span class="s1">&#39;no_duplicates&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">is_unique</span>
+
+    <span class="c1"># 4. Validity — no nulls in key columns</span>
+    <span class="k">if</span> <span class="n">id_col</span> <span class="ow">in</span> <span class="n">target_df</span><span class="p">:</span>
+        <span class="n">tests</span><span class="p">[</span><span class="s1">&#39;no_null_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_df</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># 5. No nulls in value column</span>
+    <span class="k">if</span> <span class="n">value_col</span> <span class="ow">in</span> <span class="n">target_df</span><span class="p">:</span>
+        <span class="n">tests</span><span class="p">[</span><span class="s1">&#39;no_null_revenue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_df</span><span class="p">[</span><span class="n">value_col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># Report</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;── ETL Test Results ──────────────────&#39;</span><span class="p">)</span>
+    <span class="n">all_pass</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">tests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;✅ PASS&#39;</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s1">&#39;❌ FAIL&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">test</span><span class="si">:</span><span class="s1">30s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span> <span class="n">all_pass</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Overall: </span><span class="si">{</span><span class="s1">&#39;✅ ALL TESTS PASSED&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">all_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ SOME TESTS FAILED&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_pass</span>
+
+<span class="c1"># Demo</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;revenue&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">]})</span>
+<span class="n">target_good</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">target_bad</span>  <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">target_bad</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># introduce a null</span>
+<span class="n">target_bad</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">target_bad</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([{</span><span class="s1">&#39;order_id&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;revenue&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">}])],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># duplicate</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Good target ===&#39;</span><span class="p">)</span>
+<span class="n">run_etl_tests</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target_good</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== Bad target (null + duplicate) ===&#39;</span><span class="p">)</span>
+<span class="n">run_etl_tests</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target_bad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="incremental-loads">
+<h2>5 · Incremental Loads <a id='incremental'></a><a class="headerlink" href="#incremental-loads" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>Quiz question<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“Best way to implement incremental loads in an ETL pipeline?”</em><br />
+✅ <strong>Use a timestamp column</strong> (<code class="docutils literal notranslate"><span class="pre">updated_at</span></code>) to filter only new/modified records</p>
+</div></blockquote>
+</section>
+<section id="incremental-load-strategies">
+<h3>Incremental load strategies<a class="headerlink" href="#incremental-load-strategies" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strategy</p></th>
+<th class="head"><p>How</p></th>
+<th class="head"><p>Best for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Timestamp-based</strong> ✅</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">updated_at</span> <span class="pre">&gt;</span> <span class="pre">last_run</span></code></p></td>
+<td><p>Tables with reliable <code class="docutils literal notranslate"><span class="pre">updated_at</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>High-water mark</strong></p></td>
+<td><p>Track max ID or date processed</p></td>
+<td><p>Append-only tables</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CDC (Change Data Capture)</strong></p></td>
+<td><p>Read DB transaction logs</p></td>
+<td><p>Full change tracking</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Partition-based</strong></p></td>
+<td><p>Process only today’s partition</p></td>
+<td><p>Data lakes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>A <strong>message queue</strong> (Kafka, RabbitMQ) is for <strong>streaming</strong>, not incremental batch loads.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Incremental load pattern ────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Simulate source table with timestamps</span>
+<span class="n">source_db</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;order_id&#39;</span><span class="p">:</span>   <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">290</span><span class="p">],</span>
+    <span class="s1">&#39;updated_at&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Full load (first run)</span>
+<span class="n">last_successful_run</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">incremental_extract</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">last_run</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract only records updated after last_run.&quot;&quot;&quot;</span>
+    <span class="n">new_records</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">source</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">last_run</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">new_records</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Source table: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">source_db</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">source_db</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">── Incremental extract (last_run = </span><span class="si">{</span><span class="n">last_successful_run</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s1">) ──&#39;</span><span class="p">)</span>
+<span class="n">incremental</span> <span class="o">=</span> <span class="n">incremental_extract</span><span class="p">(</span><span class="n">source_db</span><span class="p">,</span> <span class="n">last_successful_run</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Records to process: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">incremental</span><span class="p">)</span><span class="si">}</span><span class="s1"> (only new/updated)&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">incremental</span><span class="p">)</span>
+
+<span class="c1"># After processing, update the watermark</span>
+<span class="n">new_watermark</span> <span class="o">=</span> <span class="n">incremental</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">New watermark for next run: </span><span class="si">{</span><span class="n">new_watermark</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="outlier-replacement-pipeline">
+<h2>6 · Outlier Replacement Pipeline <a id='outliers'></a><a class="headerlink" href="#outlier-replacement-pipeline" title="Link to this heading">#</a></h2>
+<section id="task">
+<h3>Task<a class="headerlink" href="#task" title="Link to this heading">#</a></h3>
+<p>Replace revenue outliers using percentile-based winsorizing:</p>
+<ul class="simple">
+<li><p>Outliers = values <strong>below P1</strong> or <strong>above P99</strong></p></li>
+<li><p>Replace above P99 with <strong>max of non-outliers</strong></p></li>
+<li><p>Replace below P1 with <strong>min of non-outliers</strong></p></li>
+</ul>
+<p><strong>Evaluation score:</strong><br />
+<code class="docutils literal notranslate"><span class="pre">score</span> <span class="pre">=</span> <span class="pre">100</span> <span class="pre">×</span> <span class="pre">(1</span> <span class="pre">−</span> <span class="pre">outliers_remaining</span> <span class="pre">/</span> <span class="pre">total_outliers)</span></code><br />
+→ Score = 100 when zero outliers remain ✅</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Outlier replacement pipeline (competition solution) ─────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Simulate data.csv</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span>   <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;date&#39;</span><span class="p">:</span>     <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+        <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">20</span><span class="p">),</span>  <span class="c1"># normal values</span>
+        <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>  <span class="c1"># high outliers</span>
+        <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>      <span class="c1"># low outliers</span>
+    <span class="p">])</span>
+<span class="p">})</span>
+<span class="c1"># data = pd.read_csv(&#39;dataset/data.csv&#39;)  # ← use this in the actual competition</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Before: shape=</span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">  revenue range=[</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;revenue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;revenue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Solution ───────────────────────────────────────────────────</span>
+<span class="c1"># Step 1: percentile bounds</span>
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.99</span><span class="p">)</span>
+
+<span class="c1"># Step 2: min/max of NON-outliers</span>
+<span class="n">mask_clean</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span><span class="p">)</span>
+<span class="n">rev_min</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_clean</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">rev_max</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_clean</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="n">outliers_before</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">mask_clean</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P1=</span><span class="si">{</span><span class="n">lower_bound</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  P99=</span><span class="si">{</span><span class="n">upper_bound</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;clean_min=</span><span class="si">{</span><span class="n">rev_min</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">  clean_max=</span><span class="si">{</span><span class="n">rev_max</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outliers found: </span><span class="si">{</span><span class="n">outliers_before</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Step 3: replace</span>
+<span class="n">submission</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">submission</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">submission</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rev_max</span>
+<span class="n">submission</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">submission</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rev_min</span>
+
+<span class="c1"># submission.to_csv(&#39;submission.csv&#39;, index=False)  # ← save in competition</span>
+
+<span class="c1"># Verify</span>
+<span class="n">still_outlier</span> <span class="o">=</span> <span class="p">((</span><span class="n">submission</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">submission</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">score</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">still_outlier</span> <span class="o">/</span> <span class="n">outliers_before</span><span class="p">)</span> <span class="k">if</span> <span class="n">outliers_before</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outliers remaining: </span><span class="si">{</span><span class="n">still_outlier</span><span class="si">}</span><span class="s1">  →  Score = </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">/100 ✅&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Before: revenue with outliers&#39;</span><span class="p">)</span>
+<span class="n">submission</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;After: outliers replaced&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="kafka-streaming-etl">
+<h2>7 · Kafka Streaming ETL <a id='kafka'></a><a class="headerlink" href="#kafka-streaming-etl" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Quiz question<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“Correct sequence to build a Kafka stream-processing ETL pipeline?”</em><br />
+✅ <strong>1 → 4 → 3 → 2</strong></p>
+</div></blockquote>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Action</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1</strong></p></td>
+<td><p>Extract data into Kafka</p></td>
+<td><p>Producer publishes to topic</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>4</strong></p></td>
+<td><p>Pull data from Kafka topics</p></td>
+<td><p>Consumer subscribes and reads</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3</strong></p></td>
+<td><p>Transform data in KStream objects</p></td>
+<td><p>Real-time filtering/mapping/aggregation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2</strong></p></td>
+<td><p>Load data to other systems</p></td>
+<td><p>Sink connector writes to DB/DWH</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Source DB / App]
+      ↓ (1) Extract
+[Kafka Topic]  ←──── Kafka Broker (message queue)
+      ↓ (4) Pull / Consume
+[KStream Processor]
+      ↓ (3) Transform (filter, map, aggregate)
+[Sink / Target System]
+      ↓ (2) Load
+[Data Warehouse / DB / Dashboard]
+</pre></div>
+</div>
+</section>
+<section id="key-kafka-concepts">
+<h3>Key Kafka concepts<a class="headerlink" href="#key-kafka-concepts" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Producer</strong></p></td>
+<td><p>Publishes messages to a topic</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Consumer</strong></p></td>
+<td><p>Subscribes to a topic and reads messages</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Topic</strong></p></td>
+<td><p>Named channel — like a database table for streams</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Partition</strong></p></td>
+<td><p>Parallelism unit within a topic</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>KStream</strong></p></td>
+<td><p>Continuous stream of records for real-time transformation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>KTable</strong></p></td>
+<td><p>Stateful view — latest value per key</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sql-in-etl-join-aggregation">
+<h2>8 · SQL in ETL — JOIN &amp; Aggregation <a id='sql-etl'></a><a class="headerlink" href="#sql-in-etl-join-aggregation" title="Link to this heading">#</a></h2>
+<section id="common-etl-sql-patterns">
+<h3>Common ETL SQL patterns<a class="headerlink" href="#common-etl-sql-patterns" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Full name with uppercase last name + total spend, sorted</span>
+<span class="k">SELECT</span>
+<span class="w">    </span><span class="n">CONCAT</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="k">UPPER</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">last_name</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">full_name</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">price</span><span class="p">)</span><span class="w">                                   </span><span class="k">AS</span><span class="w"> </span><span class="n">amount_spent</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="k">c</span>
+<span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">last_name</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">amount_spent</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span>
+<span class="w">         </span><span class="n">full_name</span><span class="w">    </span><span class="k">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── SQL ETL pattern: customers + orders ────────────────────────</span>
+<span class="n">conn2</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;:memory:&#39;</span><span class="p">)</span>
+
+<span class="n">customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;id&#39;</span><span class="p">:</span>         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Carol&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;last_name&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;Jones&#39;</span><span class="p">,</span> <span class="s1">&#39;Adams&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;order_id&#39;</span><span class="p">:</span>    <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+    <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;price&#39;</span><span class="p">:</span>       <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="n">customers</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;customers&#39;</span><span class="p">,</span> <span class="n">conn2</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+<span class="n">orders</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;orders&#39;</span><span class="p">,</span>    <span class="n">conn2</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT</span>
+<span class="s2">        (c.first_name || &#39; &#39; || UPPER(c.last_name)) AS full_name,</span>
+<span class="s2">        SUM(o.price)                                AS amount_spent</span>
+<span class="s2">    FROM customers c</span>
+<span class="s2">    JOIN orders o ON c.id = o.customer_id</span>
+<span class="s2">    GROUP BY c.id, c.first_name, c.last_name</span>
+<span class="s2">    ORDER BY amount_spent DESC,</span>
+<span class="s2">             full_name    ASC</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">conn2</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="full-python-etl-pipeline">
+<h2>9 · Full Python ETL Pipeline <a id='full-pipeline'></a><a class="headerlink" href="#full-python-etl-pipeline" title="Link to this heading">#</a></h2>
+<p>A complete, reusable ETL class pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>extract() → validate() → transform() → load() → test()
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Full ETL Pipeline class ─────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ETLPipeline</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reusable ETL pipeline with Extract, Transform, Load, and Test phases.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span>   <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># ── EXTRACT ──────────────────────────────────────────────────</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span>   <span class="o">=</span> <span class="n">source_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[EXTRACT] </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows loaded&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># ── TRANSFORM ────────────────────────────────────────────────</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">drop_nulls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="n">before</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[TRANSFORM] drop_nulls: </span><span class="si">{</span><span class="n">before</span><span class="si">}</span><span class="s1"> → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="n">before</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[TRANSFORM] remove_duplicates: </span><span class="si">{</span><span class="n">before</span><span class="si">}</span><span class="s1"> → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">clip_outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">p_low</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">p_high</span><span class="o">=</span><span class="mf">0.99</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">p_low</span><span class="p">)</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">p_high</span><span class="p">)</span>
+        <span class="n">clean_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">lo</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">),</span> <span class="n">col</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">hi</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">clean_vals</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lo</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">clean_vals</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[TRANSFORM] clip_outliers on </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">: P</span><span class="si">{</span><span class="n">p_low</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">lo</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> P</span><span class="si">{</span><span class="n">p_high</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">hi</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[TRANSFORM] added column: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># ── INCREMENTAL FILTER ───────────────────────────────────────</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">incremental</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">last_run</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="n">before</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">date_col</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">last_run</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[EXTRACT] incremental: </span><span class="si">{</span><span class="n">before</span><span class="si">}</span><span class="s1"> → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows (after </span><span class="si">{</span><span class="n">last_run</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># ── LOAD ─────────────────────────────────────────────────────</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">table_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ETLPipeline&#39;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SELECT * FROM </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[LOAD] </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows written to </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># ── TEST ─────────────────────────────────────────────────────</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_col</span><span class="o">=</span><span class="s1">&#39;order_id&#39;</span><span class="p">,</span> <span class="n">value_col</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[TEST] Running data quality checks...&#39;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;row_count_match&#39;</span><span class="p">:</span>   <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+            <span class="s1">&#39;no_duplicates&#39;</span><span class="p">:</span>     <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">is_unique</span> <span class="k">if</span> <span class="n">id_col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;no_null_keys&#39;</span><span class="p">:</span>      <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">id_col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="n">id_col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;no_null_values&#39;</span><span class="p">:</span>    <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">value_col</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="n">value_col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="k">else</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">test</span><span class="p">,</span> <span class="n">passed</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">test</span><span class="si">:</span><span class="s1">30s</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="s2">&quot;✅&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">passed</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;❌&quot;</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+
+<span class="c1"># ── Run the pipeline ───────────────────────────────────────────</span>
+<span class="n">rng</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n</span>    <span class="o">=</span> <span class="mi">200</span>
+<span class="n">raw</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;date&#39;</span><span class="p">:</span>     <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">10</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)]),</span>
+    <span class="s1">&#39;customer&#39;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>  <span class="c1"># some nulls</span>
+<span class="p">})</span>
+<span class="c1"># Add a duplicate row</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">raw</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">target_conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;:memory:&#39;</span><span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">ETLPipeline</span><span class="p">(</span><span class="s1">&#39;OrdersPipeline&#39;</span><span class="p">)</span>
+<span class="n">all_tests_pass</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pipeline</span>
+    <span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">drop_nulls</span><span class="p">([</span><span class="s1">&#39;customer&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">remove_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">clip_outliers</span><span class="p">(</span><span class="s1">&#39;revenue&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;revenue_eur&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.92</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">target_conn</span><span class="p">,</span> <span class="s1">&#39;orders_clean&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">test</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pipeline result: </span><span class="si">{</span><span class="s2">&quot;✅ SUCCESS&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">all_tests_pass</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;❌ FAILED&quot;</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./07_etl_data_wrangling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-etl">1 · What is ETL? <a id="etl-intro"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-sources-extract">Common data sources (Extract)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-vs-elt">2 · ETL vs ELT <a id="etl-vs-elt"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-for-etl">3 · Data Sources for ETL <a id="sources"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quiz-question">Quiz question</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-testing">4 · ETL Testing <a id="testing"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etl-testing-checklist">ETL testing checklist</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-loads">5 · Incremental Loads <a id="incremental"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incremental-load-strategies">Incremental load strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier-replacement-pipeline">6 · Outlier Replacement Pipeline <a id="outliers"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task">Task</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-streaming-etl">7 · Kafka Streaming ETL <a id="kafka"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Quiz question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-kafka-concepts">Key Kafka concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-in-etl-join-aggregation">8 · SQL in ETL — JOIN &amp; Aggregation <a id="sql-etl"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-etl-sql-patterns">Common ETL SQL patterns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-python-etl-pipeline">9 · Full Python ETL Pipeline <a id="full-pipeline"></a></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mateo Gomez Tamayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

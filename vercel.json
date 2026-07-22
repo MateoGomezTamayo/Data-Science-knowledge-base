@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pip install jupyter-book && jupyter-book build .",
-  "outputDirectory": "_build/html",
   "framework": null,
-  "installCommand": "pip install jupyter-book numpy pandas matplotlib scikit-learn scipy"
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "."
 }

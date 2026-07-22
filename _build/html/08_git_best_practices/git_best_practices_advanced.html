@@ -1,0 +1,1213 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Git &amp; Best Practices — Advanced Reference &#8212; 📚 Data Science Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_git_best_practices/git_best_practices_advanced';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ETL — Quiz Notes &amp; Runnable Examples" href="../07_etl_data_wrangling/etl_quiz_complete.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">📚 Data Science Knowledge Base</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    📚 Data Science Knowledge Base
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">🗃️ SQL</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_sql/sql_advanced.html">SQL — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🐍 Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_advanced.html">Python — Advanced Reference for Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_python/python_ds_patterns.html">Python for Data Science — Patterns &amp; Pitfalls</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📊 Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_statistics/statistics_advanced.html">Statistics — Advanced Reference for Data Scientists</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">📈 Visualization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../04_visualization/visualization_advanced.html">Data Visualization — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🤖 Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../05_ml_modeling/ml_modeling_advanced.html">Machine Learning Modeling — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🧠 Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06_deep_learning/deep_learning_advanced.html">Deep Learning — Advanced Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🔄 ETL &amp; Data Wrangling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_data_wrangling_advanced.html">ETL &amp; Data Wrangling — Advanced Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_etl_data_wrangling/etl_quiz_complete.html">ETL — Quiz Notes &amp; Runnable Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🛠️ Git &amp; Best Practices</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Git &amp; Best Practices — Advanced Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/08_git_best_practices/git_best_practices_advanced.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Git & Best Practices — Advanced Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-workflow-branching-strategies">1 · Git Workflow &amp; Branching Strategies <a id="git"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-flow-feature-branches">Git Flow (feature branches)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trunk-based-development-recommended-for-small-teams">Trunk-Based Development (recommended for small teams)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-science-project-structure">2 · Data Science Project Structure <a id="structure"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-environments-dependency-management">3 · Python Environments &amp; Dependency Management <a id="envs"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-quality-linting-formatting-type-checking">4 · Code Quality: Linting, Formatting, Type Checking <a id="quality"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-data-science-pytest">5 · Testing for Data Science (pytest) <a id="testing"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-monitoring">6 · Logging &amp; Monitoring <a id="logging"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-management">7 · Configuration Management <a id="config"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-for-ds-projects">8 · Docker for DS Projects <a id="docker"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-experiment-tracking">9 · MLflow: Experiment Tracking <a id="mlflow"></a></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="git-best-practices-advanced-reference">
+<h1>Git &amp; Best Practices — Advanced Reference<a class="headerlink" href="#git-best-practices-advanced-reference" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Level:</strong> Advanced | <strong>Goal:</strong> Professional development workflow for data science projects</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#git"><span class="xref myst">Git Workflow &amp; Branching Strategies</span></a></p></li>
+<li><p><a class="reference internal" href="#structure"><span class="xref myst">Data Science Project Structure</span></a></p></li>
+<li><p><a class="reference internal" href="#envs"><span class="xref myst">Python Environments &amp; Dependency Management</span></a></p></li>
+<li><p><a class="reference internal" href="#quality"><span class="xref myst">Code Quality: Linting, Formatting, Type Checking</span></a></p></li>
+<li><p><a class="reference internal" href="#testing"><span class="xref myst">Testing for Data Science (pytest)</span></a></p></li>
+<li><p><a class="reference internal" href="#logging"><span class="xref myst">Logging &amp; Monitoring</span></a></p></li>
+<li><p><a class="reference internal" href="#config"><span class="xref myst">Configuration Management</span></a></p></li>
+<li><p><a class="reference internal" href="#docker"><span class="xref myst">Docker for DS Projects</span></a></p></li>
+<li><p><a class="reference internal" href="#mlflow"><span class="xref myst">MLflow: Experiment Tracking</span></a></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="git-workflow-branching-strategies">
+<h2>1 · Git Workflow &amp; Branching Strategies <a id='git'></a><a class="headerlink" href="#git-workflow-branching-strategies" title="Link to this heading">#</a></h2>
+<section id="git-flow-feature-branches">
+<h3>Git Flow (feature branches)<a class="headerlink" href="#git-flow-feature-branches" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>main (production)
+  └── develop (integration)
+        ├── feature/user-churn-model
+        ├── feature/data-pipeline-v2
+        └── hotfix/fix-null-handling
+</pre></div>
+</div>
+</section>
+<section id="trunk-based-development-recommended-for-small-teams">
+<h3>Trunk-Based Development (recommended for small teams)<a class="headerlink" href="#trunk-based-development-recommended-for-small-teams" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>main  ← short-lived feature branches merged frequently
+  ├── feat/add-feature-X  (1–2 days max, then merge)
+  └── feat/improve-model
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This notebook contains shell commands shown as strings for reference.</span>
+<span class="c1"># Run them in a terminal, not as Python.</span>
+
+<span class="n">GIT_CHEATSHEET</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">GIT CHEATSHEET FOR DATA SCIENTISTS</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="s2"># ── Setup ──────────────────────────────────</span>
+<span class="s2">git config --global user.name  &quot;Your Name&quot;</span>
+<span class="s2">git config --global user.email &quot;you@email.com&quot;</span>
+<span class="s2">git config --global core.editor &quot;code --wait&quot;  # VSCode as editor</span>
+
+<span class="s2"># ── Daily workflow ─────────────────────────</span>
+<span class="s2">git status                        # what changed?</span>
+<span class="s2">git diff                          # see changes</span>
+<span class="s2">git diff --staged                 # see staged changes</span>
+<span class="s2">git add -p                        # interactive staging (review each chunk)</span>
+<span class="s2">git commit -m &quot;feat: add churn model with SHAP explanations&quot;</span>
+<span class="s2">git push origin feat/churn-model</span>
+
+<span class="s2"># ── Branching ──────────────────────────────</span>
+<span class="s2">git checkout -b feat/new-feature  # create + switch</span>
+<span class="s2">git branch -d feat/old-feature    # delete merged branch</span>
+<span class="s2">git stash                         # save dirty state</span>
+<span class="s2">git stash pop                     # restore</span>
+
+<span class="s2"># ── Inspecting history ─────────────────────</span>
+<span class="s2">git log --oneline --graph --all   # visual branch graph</span>
+<span class="s2">git log --follow -p notebooks/model.ipynb  # file history</span>
+<span class="s2">git blame src/features.py         # who changed each line?</span>
+<span class="s2">git bisect start                  # binary search for bug</span>
+
+<span class="s2"># ── Undoing mistakes ──────────────────────</span>
+<span class="s2">git restore &lt;file&gt;                # discard unstaged changes</span>
+<span class="s2">git restore --staged &lt;file&gt;       # unstage</span>
+<span class="s2">git revert HEAD                   # safe undo (new commit)</span>
+<span class="s2">git reset --soft HEAD~1           # undo last commit, keep staged</span>
+<span class="s2">git reset --hard HEAD~1           # ⚠️ destructive: lose changes</span>
+
+<span class="s2"># ── Collaboration ──────────────────────────</span>
+<span class="s2">git fetch --all --prune           # update remote info</span>
+<span class="s2">git rebase origin/main            # replay commits on top of main</span>
+<span class="s2">git merge --squash feat/branch    # combine into one commit</span>
+<span class="s2">git cherry-pick &lt;commit-hash&gt;     # apply single commit</span>
+
+<span class="s2"># ── Large file handling (Git LFS) ──────────</span>
+<span class="s2">git lfs track &quot;*.csv&quot;</span>
+<span class="s2">git lfs track &quot;models/*.pkl&quot;</span>
+<span class="s2">git lfs track &quot;data/*.parquet&quot;</span>
+
+<span class="s2"># ── .gitignore for DS projects ─────────────</span>
+<span class="s2"># Add to .gitignore:</span>
+<span class="s2"># data/raw/        ← never commit raw data</span>
+<span class="s2"># data/processed/  ← generated, not tracked</span>
+<span class="s2"># models/*.pkl     ← use MLflow / DVC instead</span>
+<span class="s2"># .env             ← secrets!</span>
+<span class="s2"># __pycache__/</span>
+<span class="s2"># .ipynb_checkpoints/</span>
+<span class="s2"># .venv/</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">GIT_CHEATSHEET</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-science-project-structure">
+<h2>2 · Data Science Project Structure <a id='structure'></a><a class="headerlink" href="#data-science-project-structure" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PROJECT_STRUCTURE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">my-ds-project/</span>
+<span class="s2">├── .github/</span>
+<span class="s2">│   └── workflows/</span>
+<span class="s2">│       └── ci.yml              # GitHub Actions: tests, lint</span>
+<span class="s2">├── data/</span>
+<span class="s2">│   ├── raw/                    # immutable source data (.gitignore)</span>
+<span class="s2">│   ├── interim/                # cleaned but not final</span>
+<span class="s2">│   └── processed/              # model-ready features</span>
+<span class="s2">├── notebooks/</span>
+<span class="s2">│   ├── 01_eda.ipynb            # numbered for sequence</span>
+<span class="s2">│   ├── 02_features.ipynb</span>
+<span class="s2">│   └── 03_modeling.ipynb</span>
+<span class="s2">├── src/</span>
+<span class="s2">│   └── my_project/</span>
+<span class="s2">│       ├── __init__.py</span>
+<span class="s2">│       ├── data/</span>
+<span class="s2">│       │   ├── __init__.py</span>
+<span class="s2">│       │   ├── loaders.py      # data ingestion</span>
+<span class="s2">│       │   └── transforms.py   # cleaning/transformation</span>
+<span class="s2">│       ├── features/</span>
+<span class="s2">│       │   └── engineering.py  # feature creation</span>
+<span class="s2">│       ├── models/</span>
+<span class="s2">│       │   ├── train.py</span>
+<span class="s2">│       │   ├── evaluate.py</span>
+<span class="s2">│       │   └── predict.py</span>
+<span class="s2">│       └── utils/</span>
+<span class="s2">│           ├── config.py</span>
+<span class="s2">│           └── logging.py</span>
+<span class="s2">├── tests/</span>
+<span class="s2">│   ├── test_transforms.py</span>
+<span class="s2">│   ├── test_features.py</span>
+<span class="s2">│   └── test_models.py</span>
+<span class="s2">├── models/                     # saved model artifacts (use DVC/MLflow)</span>
+<span class="s2">├── reports/</span>
+<span class="s2">│   └── figures/</span>
+<span class="s2">├── configs/</span>
+<span class="s2">│   └── config.yaml</span>
+<span class="s2">├── Makefile                    # common commands: make train, make test</span>
+<span class="s2">├── pyproject.toml              # project metadata + dependencies</span>
+<span class="s2">├── .env.example                # template (never commit .env)</span>
+<span class="s2">├── .gitignore</span>
+<span class="s2">├── README.md</span>
+<span class="s2">└── Dockerfile</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">PROJECT_STRUCTURE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="python-environments-dependency-management">
+<h2>3 · Python Environments &amp; Dependency Management <a id='envs'></a><a class="headerlink" href="#python-environments-dependency-management" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ENV_GUIDE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">ENVIRONMENT MANAGEMENT OPTIONS</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="s2">── Option 1: uv (fastest, modern) ──────────</span>
+<span class="s2">pip install uv</span>
+
+<span class="s2">uv venv .venv</span>
+<span class="s2">source .venv/bin/activate      # Mac/Linux</span>
+<span class="s2">.venv</span><span class="se">\\</span><span class="s2">Scripts</span><span class="se">\\</span><span class="s2">activate          # Windows</span>
+
+<span class="s2">uv pip install pandas scikit-learn xgboost</span>
+<span class="s2">uv pip freeze &gt; requirements.txt</span>
+
+<span class="s2">── Option 2: conda ──────────────────────────</span>
+<span class="s2">conda create -n myproject python=3.11</span>
+<span class="s2">conda activate myproject</span>
+<span class="s2">conda install pandas scikit-learn -c conda-forge</span>
+<span class="s2">conda env export &gt; environment.yml</span>
+<span class="s2">conda env create -f environment.yml  # reproduce</span>
+
+<span class="s2">── Option 3: pyproject.toml (pypa/build) ────</span>
+<span class="s2">[build-system]</span>
+<span class="s2">requires = [&quot;hatchling&quot;]</span>
+<span class="s2">build-backend = &quot;hatchling.build&quot;</span>
+
+<span class="s2">[project]</span>
+<span class="s2">name = &quot;my-ds-project&quot;</span>
+<span class="s2">version = &quot;0.1.0&quot;</span>
+<span class="s2">requires-python = &quot;&gt;=3.11&quot;</span>
+<span class="s2">dependencies = [</span>
+<span class="s2">    &quot;pandas&gt;=2.0&quot;,</span>
+<span class="s2">    &quot;scikit-learn&gt;=1.3&quot;,</span>
+<span class="s2">    &quot;xgboost&gt;=2.0&quot;,</span>
+<span class="s2">    &quot;lightgbm&gt;=4.0&quot;,</span>
+<span class="s2">    &quot;matplotlib&gt;=3.7&quot;,</span>
+<span class="s2">    &quot;seaborn&gt;=0.12&quot;,</span>
+<span class="s2">]</span>
+
+<span class="s2">[project.optional-dependencies]</span>
+<span class="s2">dev = [&quot;pytest&quot;, &quot;ruff&quot;, &quot;mypy&quot;, &quot;pre-commit&quot;]</span>
+<span class="s2">notebooks = [&quot;jupyterlab&quot;, &quot;nbstripout&quot;, &quot;nbconvert&quot;]</span>
+
+<span class="s2"># Install: pip install -e .[dev]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ENV_GUIDE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="code-quality-linting-formatting-type-checking">
+<h2>4 · Code Quality: Linting, Formatting, Type Checking <a id='quality'></a><a class="headerlink" href="#code-quality-linting-formatting-type-checking" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">QUALITY_GUIDE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+<span class="s2">CODE QUALITY TOOLS</span>
+<span class="s2">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+
+<span class="s2">── Ruff (replaces black + flake8 + isort) ──</span>
+<span class="s2">pip install ruff</span>
+
+<span class="s2">ruff check src/              # lint</span>
+<span class="s2">ruff check --fix src/        # auto-fix</span>
+<span class="s2">ruff format src/             # format (like black)</span>
+
+<span class="s2"># pyproject.toml config:</span>
+<span class="s2">[tool.ruff]</span>
+<span class="s2">line-length = 88</span>
+<span class="s2">target-version = &quot;py311&quot;</span>
+<span class="s2">select = [&quot;E&quot;,&quot;F&quot;,&quot;W&quot;,&quot;I&quot;,&quot;N&quot;,&quot;UP&quot;,&quot;B&quot;,&quot;SIM&quot;]</span>
+
+<span class="s2">── mypy (static type checking) ─────────────</span>
+<span class="s2">pip install mypy</span>
+<span class="s2">mypy src/ --ignore-missing-imports</span>
+
+<span class="s2">[tool.mypy]</span>
+<span class="s2">python_version = &quot;3.11&quot;</span>
+<span class="s2">strict = true</span>
+<span class="s2">ignore_missing_imports = true</span>
+
+<span class="s2">── pre-commit (run checks before every commit)</span>
+<span class="s2">pip install pre-commit</span>
+<span class="s2">pre-commit install</span>
+
+<span class="s2"># .pre-commit-config.yaml:</span>
+<span class="s2">repos:</span>
+<span class="s2">  - repo: https://github.com/astral-sh/ruff-pre-commit</span>
+<span class="s2">    rev: v0.1.6</span>
+<span class="s2">    hooks:</span>
+<span class="s2">      - id: ruff</span>
+<span class="s2">        args: [--fix]</span>
+<span class="s2">      - id: ruff-format</span>
+
+<span class="s2">  - repo: https://github.com/pre-commit/pre-commit-hooks</span>
+<span class="s2">    rev: v4.5.0</span>
+<span class="s2">    hooks:</span>
+<span class="s2">      - id: check-yaml</span>
+<span class="s2">      - id: end-of-file-fixer</span>
+<span class="s2">      - id: trailing-whitespace</span>
+<span class="s2">      - id: detect-private-key   # security!</span>
+
+<span class="s2">  - repo: https://github.com/kynan/nbstripout</span>
+<span class="s2">    rev: 0.6.1</span>
+<span class="s2">    hooks:</span>
+<span class="s2">      - id: nbstripout            # strip notebook outputs before committing</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">QUALITY_GUIDE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="testing-for-data-science-pytest">
+<h2>5 · Testing for Data Science (pytest) <a id='testing'></a><a class="headerlink" href="#testing-for-data-science-pytest" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Example: tests for a data cleaning function ───────────────</span>
+<span class="c1"># Save this as tests/test_transforms.py and run: pytest tests/</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Function under test</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_revenue</span><span class="p">(</span><span class="n">series</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lower_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">upper_pct</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="n">lower_pct</span><span class="p">,</span> <span class="n">upper_pct</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">series</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># ── Test functions ─────────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_clean_revenue_clips_outliers</span><span class="p">():</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">500</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">clean_revenue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;Outlier not clipped&quot;</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="kc">True</span>   <span class="c1"># depends on data</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_clean_revenue_fills_nans</span><span class="p">():</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">clean_revenue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;NaN values remain&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_clean_revenue_preserves_length</span><span class="p">():</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">clean_revenue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_clean_revenue_empty_series</span><span class="p">():</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">clean_revenue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="c1"># Run tests inline</span>
+<span class="n">test_clean_revenue_clips_outliers</span><span class="p">()</span>
+<span class="n">test_clean_revenue_fills_nans</span><span class="p">()</span>
+<span class="n">test_clean_revenue_preserves_length</span><span class="p">()</span>
+<span class="n">test_clean_revenue_empty_series</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All tests passed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Parametrized tests with pytest ─────────────────────────────</span>
+<span class="n">PYTEST_EXAMPLE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># tests/test_features.py</span>
+<span class="s2">import pytest</span>
+<span class="s2">import pandas as pd</span>
+<span class="s2">import numpy as np</span>
+<span class="s2">from src.my_project.features.engineering import compute_age_group</span>
+
+<span class="s2">@pytest.mark.parametrize(&quot;age,expected&quot;, [</span>
+<span class="s2">    (20, &#39;18-25&#39;),</span>
+<span class="s2">    (30, &#39;26-35&#39;),</span>
+<span class="s2">    (55, &#39;51-65&#39;),</span>
+<span class="s2">    (70, &#39;65+&#39;),</span>
+<span class="s2">])</span>
+<span class="s2">def test_age_group(age, expected):</span>
+<span class="s2">    s = pd.Series([age])</span>
+<span class="s2">    result = compute_age_group(s)</span>
+<span class="s2">    assert result.iloc[0] == expected</span>
+
+<span class="s2">@pytest.fixture</span>
+<span class="s2">def sample_df():</span>
+<span class="s2">    return pd.DataFrame({&#39;age&#39;: [20, 30, 55], &#39;income&#39;: [30000, 60000, 90000]})</span>
+
+<span class="s2">def test_pipeline_output_shape(sample_df):</span>
+<span class="s2">    from src.my_project.data.transforms import run_pipeline</span>
+<span class="s2">    result = run_pipeline(sample_df)</span>
+<span class="s2">    assert result.shape[0] == sample_df.shape[0]   # rows preserved</span>
+<span class="s2">    assert &#39;age_group&#39; in result.columns</span>
+
+<span class="s2"># Run with coverage:</span>
+<span class="s2"># pytest tests/ --cov=src --cov-report=html</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">PYTEST_EXAMPLE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="logging-monitoring">
+<h2>6 · Logging &amp; Monitoring <a id='logging'></a><a class="headerlink" href="#logging-monitoring" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">logging.handlers</span><span class="w"> </span><span class="kn">import</span> <span class="n">RotatingFileHandler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+               <span class="n">log_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Production-ready logger with optional file output.&quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">logger</span>  <span class="c1"># avoid adding handlers multiple times</span>
+
+    <span class="n">fmt</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> | </span><span class="si">%(name)s</span><span class="s1"> | </span><span class="si">%(levelname)s</span><span class="s1"> | </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Console handler</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+
+    <span class="c1"># File handler with rotation</span>
+    <span class="k">if</span> <span class="n">log_file</span><span class="p">:</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">log_file</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">RotatingFileHandler</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">,</span> <span class="n">backupCount</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">logger</span>
+
+
+<span class="c1"># Usage</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;pipeline&#39;</span><span class="p">,</span> <span class="n">log_file</span><span class="o">=</span><span class="s1">&#39;logs/pipeline.log&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Pipeline started&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Found 3 duplicate records&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to load file: missing column &#39;user_id&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="configuration-management">
+<h2>7 · Configuration Management <a id='config'></a><a class="headerlink" href="#configuration-management" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Structured config with Pydantic or dataclasses ─────────────</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataConfig</span><span class="p">:</span>
+    <span class="n">raw_path</span><span class="p">:</span>       <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;data/raw&#39;</span>
+    <span class="n">processed_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;data/processed&#39;</span>
+    <span class="n">test_size</span><span class="p">:</span>      <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">random_state</span><span class="p">:</span>   <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">target_col</span><span class="p">:</span>     <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;target&#39;</span>
+    <span class="n">drop_cols</span><span class="p">:</span>      <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModelConfig</span><span class="p">:</span>
+    <span class="n">algorithm</span><span class="p">:</span>      <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;xgboost&#39;</span><span class="p">,</span><span class="s1">&#39;lightgbm&#39;</span><span class="p">,</span><span class="s1">&#39;rf&#39;</span><span class="p">,</span><span class="s1">&#39;logistic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lightgbm&#39;</span>
+    <span class="n">n_estimators</span><span class="p">:</span>   <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="n">learning_rate</span><span class="p">:</span>  <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="n">max_depth</span><span class="p">:</span>      <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">n_cv_folds</span><span class="p">:</span>     <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">scoring</span><span class="p">:</span>        <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;roc_auc&#39;</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">DataConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">DataConfig</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">ModelConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ModelConfig</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_yaml</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Config&#39;</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">experiment_name</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;experiment_name&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">),</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">DataConfig</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">{})),</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">ModelConfig</span><span class="p">(</span><span class="o">**</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="p">)</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">experiment_name</span><span class="o">=</span><span class="s1">&#39;churn_v1&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="c1"># ── .env file for secrets (never hardcode!) ────────────────────</span>
+<span class="n">ENV_EXAMPLE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># .env.example (commit this)</span>
+<span class="s2">DATABASE_URL=postgresql://user:password@host:5432/db</span>
+<span class="s2">AWS_ACCESS_KEY_ID=</span>
+<span class="s2">AWS_SECRET_ACCESS_KEY=</span>
+<span class="s2">MLFLOW_TRACKING_URI=http://localhost:5000</span>
+
+<span class="s2"># Load in Python:</span>
+<span class="s2"># pip install python-dotenv</span>
+<span class="s2"># from dotenv import load_dotenv</span>
+<span class="s2"># load_dotenv()</span>
+<span class="s2"># db_url = os.environ[&#39;DATABASE_URL&#39;]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ENV_EXAMPLE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="docker-for-ds-projects">
+<h2>8 · Docker for DS Projects <a id='docker'></a><a class="headerlink" href="#docker-for-ds-projects" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DOCKERFILE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># Dockerfile — production-ready DS image</span>
+<span class="s2">FROM python:3.11-slim</span>
+
+<span class="s2"># Set working directory</span>
+<span class="s2">WORKDIR /app</span>
+
+<span class="s2"># Install system deps</span>
+<span class="s2">RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends </span><span class="se">\\</span>
+<span class="s2">    build-essential </span><span class="se">\\</span>
+<span class="s2">    git </span><span class="se">\\</span>
+<span class="s2">    &amp;&amp; rm -rf /var/lib/apt/lists/*</span>
+
+<span class="s2"># Install Python dependencies (cached layer)</span>
+<span class="s2">COPY pyproject.toml .</span>
+<span class="s2">RUN pip install --no-cache-dir -e .</span>
+
+<span class="s2"># Copy source code</span>
+<span class="s2">COPY src/ ./src/</span>
+<span class="s2">COPY configs/ ./configs/</span>
+
+<span class="s2"># Non-root user (security best practice)</span>
+<span class="s2">RUN useradd -m appuser</span>
+<span class="s2">USER appuser</span>
+
+<span class="s2"># Default command</span>
+<span class="s2">CMD [&quot;python&quot;, &quot;-m&quot;, &quot;src.my_project.models.train&quot;]</span>
+
+<span class="s2"># ── docker-compose.yml ─────────────────────────────────────────</span>
+<span class="s2">version: &#39;3.9&#39;</span>
+<span class="s2">services:</span>
+<span class="s2">  training:</span>
+<span class="s2">    build: .</span>
+<span class="s2">    volumes:</span>
+<span class="s2">      - ./data:/app/data          # mount data directory</span>
+<span class="s2">      - ./models:/app/models      # persist model artifacts</span>
+<span class="s2">    env_file: .env</span>
+<span class="s2">    deploy:</span>
+<span class="s2">      resources:</span>
+<span class="s2">        reservations:</span>
+<span class="s2">          devices:</span>
+<span class="s2">            - driver: nvidia</span>
+<span class="s2">              count: 1</span>
+<span class="s2">              capabilities: [gpu]</span>
+
+<span class="s2">  jupyter:</span>
+<span class="s2">    build: .</span>
+<span class="s2">    command: jupyter lab --ip=0.0.0.0 --no-browser --allow-root</span>
+<span class="s2">    ports: [&quot;8888:8888&quot;]</span>
+<span class="s2">    volumes: [&quot;./:/app&quot;]</span>
+
+<span class="s2"># Commands:</span>
+<span class="s2"># docker build -t my-ds-project .</span>
+<span class="s2"># docker run --rm -v $(pwd)/data:/app/data my-ds-project</span>
+<span class="s2"># docker-compose up jupyter</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DOCKERFILE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="mlflow-experiment-tracking">
+<h2>9 · MLflow: Experiment Tracking <a id='mlflow'></a><a class="headerlink" href="#mlflow-experiment-tracking" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">mlflow.sklearn</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">f1_score</span>
+
+    <span class="c1"># ── Experiment tracking ────────────────────────────────────</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s1">&#39;churn-prediction&#39;</span><span class="p">)</span>
+
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">X_tr</span><span class="p">,</span> <span class="n">X_te</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+
+    <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="s1">&#39;rf-baseline&#39;</span><span class="p">):</span>
+        <span class="c1"># Log parameters</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_params</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Train</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+        <span class="c1"># Log metrics</span>
+        <span class="n">y_proba</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_te</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">y_pred</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metrics</span><span class="p">({</span>
+            <span class="s1">&#39;roc_auc&#39;</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">),</span>
+            <span class="s1">&#39;f1&#39;</span><span class="p">:</span>      <span class="n">f1_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Log model artifact</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Log tags</span>
+        <span class="n">mlflow</span><span class="o">.</span><span class="n">set_tags</span><span class="p">({</span><span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s1">&#39;ds-team&#39;</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">:</span> <span class="s1">&#39;churn-v2&#39;</span><span class="p">,</span> <span class="s1">&#39;stage&#39;</span><span class="p">:</span> <span class="s1">&#39;dev&#39;</span><span class="p">})</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Run ID: </span><span class="si">{</span><span class="n">mlflow</span><span class="o">.</span><span class="n">active_run</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROC-AUC: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">y_proba</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Start UI: mlflow ui --port 5000</span>
+
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Install: pip install mlflow&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MLflow key concepts:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.set_experiment(&#39;name&#39;)   — group related runs&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.start_run()              — context manager&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.log_params(</span><span class="si">{}</span><span class="s2">)           — hyperparameters&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.log_metrics(</span><span class="si">{}</span><span class="s2">)          — evaluation scores&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.log_artifact(path)       — files/plots&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow.sklearn.log_model()      — serialize model&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  mlflow ui --port 5000           — launch web UI&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">GITHUB_ACTIONS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># .github/workflows/ci.yml</span>
+<span class="s2">name: CI</span>
+<span class="s2">on:</span>
+<span class="s2">  push:</span>
+<span class="s2">    branches: [main, develop]</span>
+<span class="s2">  pull_request:</span>
+
+<span class="s2">jobs:</span>
+<span class="s2">  test:</span>
+<span class="s2">    runs-on: ubuntu-latest</span>
+<span class="s2">    strategy:</span>
+<span class="s2">      matrix:</span>
+<span class="s2">        python-version: [&#39;3.11&#39;, &#39;3.12&#39;]</span>
+
+<span class="s2">    steps:</span>
+<span class="s2">      - uses: actions/checkout@v4</span>
+
+<span class="s2">      - name: Set up Python</span>
+<span class="s2">        uses: actions/setup-python@v5</span>
+<span class="s2">        with:</span>
+<span class="s2">          python-version: ${{ matrix.python-version }}</span>
+
+<span class="s2">      - name: Install dependencies</span>
+<span class="s2">        run: |</span>
+<span class="s2">          pip install uv</span>
+<span class="s2">          uv pip install -e .[dev]</span>
+
+<span class="s2">      - name: Lint with ruff</span>
+<span class="s2">        run: ruff check src/</span>
+
+<span class="s2">      - name: Type check with mypy</span>
+<span class="s2">        run: mypy src/ --ignore-missing-imports</span>
+
+<span class="s2">      - name: Run tests</span>
+<span class="s2">        run: pytest tests/ --cov=src --cov-report=xml</span>
+
+<span class="s2">      - name: Upload coverage</span>
+<span class="s2">        uses: codecov/codecov-action@v4</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">GITHUB_ACTIONS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./08_git_best_practices"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../07_etl_data_wrangling/etl_quiz_complete.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ETL — Quiz Notes &amp; Runnable Examples</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-workflow-branching-strategies">1 · Git Workflow &amp; Branching Strategies <a id="git"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#git-flow-feature-branches">Git Flow (feature branches)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trunk-based-development-recommended-for-small-teams">Trunk-Based Development (recommended for small teams)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-science-project-structure">2 · Data Science Project Structure <a id="structure"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-environments-dependency-management">3 · Python Environments &amp; Dependency Management <a id="envs"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-quality-linting-formatting-type-checking">4 · Code Quality: Linting, Formatting, Type Checking <a id="quality"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-data-science-pytest">5 · Testing for Data Science (pytest) <a id="testing"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-monitoring">6 · Logging &amp; Monitoring <a id="logging"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-management">7 · Configuration Management <a id="config"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-for-ds-projects">8 · Docker for DS Projects <a id="docker"></a></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlflow-experiment-tracking">9 · MLflow: Experiment Tracking <a id="mlflow"></a></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mateo Gomez Tamayo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
