@@ -1,1 +1,7 @@
 .vercel
+.venv/
+.claude/
+__pycache__/
+.ipynb_checkpoints/
+# scratch notebook; its analyses live in 10_portfolio/ and the notes notebooks
+01_sql/playground.ipynb

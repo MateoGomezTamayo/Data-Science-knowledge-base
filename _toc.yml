@@ -5,6 +5,7 @@ parts:
   - caption: "🗃️ SQL"
     chapters:
       - file: 01_sql/sql_advanced
+      - file: 01_sql/sql_practice
 
   - caption: "🐍 Python"
     chapters:
@@ -18,6 +19,7 @@ parts:
   - caption: "📈 Visualization"
     chapters:
       - file: 04_visualization/visualization_advanced
+      - file: 04_visualization/visualization_labs
 
   - caption: "🤖 Machine Learning"
     chapters:
@@ -31,7 +33,33 @@ parts:
     chapters:
       - file: 07_etl_data_wrangling/etl_data_wrangling_advanced
       - file: 07_etl_data_wrangling/etl_quiz_complete
+      - file: 07_etl_data_wrangling/data_preprocessing_notes
 
   - caption: "🛠️ Git & Best Practices"
     chapters:
       - file: 08_git_best_practices/git_best_practices_advanced
+
+  - caption: "⭐ Portfolio Projects"
+    chapters:
+      - file: 10_portfolio/README
+        sections:
+          - file: 10_portfolio/01_automobile_price_prediction/README
+          - file: 10_portfolio/01_automobile_price_prediction/analysis
+          - file: 10_portfolio/02_laptop_price_analysis/README
+          - file: 10_portfolio/02_laptop_price_analysis/analysis
+          - file: 10_portfolio/03_co2_emissions_regression/README
+          - file: 10_portfolio/03_co2_emissions_regression/analysis
+          - file: 10_portfolio/04_customer_churn_prediction/README
+          - file: 10_portfolio/04_customer_churn_prediction/analysis
+          - file: 10_portfolio/05_obesity_level_classification/README
+          - file: 10_portfolio/05_obesity_level_classification/analysis
+          - file: 10_portfolio/06_drug_prescription_decision_tree/README
+          - file: 10_portfolio/06_drug_prescription_decision_tree/analysis
+          - file: 10_portfolio/07_taxi_tip_regression_tree/README
+          - file: 10_portfolio/07_taxi_tip_regression_tree/analysis
+          - file: 10_portfolio/08_credit_card_fraud_detection/README
+          - file: 10_portfolio/08_credit_card_fraud_detection/analysis
+          - file: 10_portfolio/09_australia_wildfire_analysis/README
+          - file: 10_portfolio/09_australia_wildfire_analysis/analysis
+          - file: 10_portfolio/10_automobile_sales_recession_analysis/README
+          - file: 10_portfolio/10_automobile_sales_recession_analysis/analysis
