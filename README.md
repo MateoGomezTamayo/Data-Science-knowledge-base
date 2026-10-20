@@ -4,7 +4,7 @@ Personal reference notebook collection covering advanced Data Science topics —
 
 ## ⭐ Portfolio: applied analyses
 
-Ten end-to-end projects, each with a notebook, a key chart and a README of findings. See [`10_portfolio/`](10_portfolio/).
+Eleven end-to-end projects, each with a notebook, a key chart and a README of findings. See [`10_portfolio/`](10_portfolio/).
 
 | Project | Headline result |
 |---|---|
@@ -18,6 +18,7 @@ Ten end-to-end projects, each with a notebook, a key chart and a README of findi
 | [Credit Card Fraud Detection](10_portfolio/08_credit_card_fraud_detection/) | SVM ROC-AUC 0.986 on 0.17% fraud |
 | [Australia Wildfire Analysis](10_portfolio/09_australia_wildfire_analysis/) | EDA + Dash dashboard |
 | [Automobile Sales During Recessions](10_portfolio/10_automobile_sales_recession_analysis/) | EDA + Dash dashboard |
+| [Impact of Noise on Data Quality](10_portfolio/11_noise_impact_breast_cancer/) | Noise keeps r ≈ 0.89; creates artificial outliers |
 
 ## 📂 Structure
 
@@ -35,7 +36,7 @@ Ten end-to-end projects, each with a notebook, a key chart and a README of findi
 | `07_etl_data_wrangling/` | `data_preprocessing_notes.ipynb` | Formatting, type fixing, normalization (simple / min-max / z-score), binning, encoding |
 | `08_git_best_practices/` | `git_best_practices_advanced.ipynb` | Git workflow, project structure, environments, testing, MLflow, Docker/CI |
 | `09_generalist/` | `generalist_english.ipynb` | Grammar, critical reasoning, passage analysis |
-| `10_portfolio/` | 10 project folders | Applied regression, classification, EDA and dashboard projects |
+| `10_portfolio/` | 11 project folders | Applied regression, classification, EDA and dashboard projects |
 
 ## 🚀 Getting Started
 

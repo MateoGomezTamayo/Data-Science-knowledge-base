@@ -1,6 +1,6 @@
 # Data Science Portfolio: Applied Analyses
 
-Ten end-to-end analyses built during the IBM Data Science Professional Certificate. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
+Eleven end-to-end analyses built during the IBM Data Science Professional Certificate. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
 
 | # | Project | Type | Techniques | Headline result |
 |---|---|---|---|---|
@@ -14,6 +14,7 @@ Ten end-to-end analyses built during the IBM Data Science Professional Certifica
 | 08 | [Credit Card Fraud Detection](08_credit_card_fraud_detection/) | Imbalanced classification | Decision tree vs linear SVM, class weights, ROC-AUC | SVM ROC-AUC **0.986** |
 | 09 | [Australia Wildfire Analysis](09_australia_wildfire_analysis/) | EDA + dashboard | Matplotlib, Seaborn, Folium, Dash + Plotly | 26,406 records, 7 regions, interactive dashboard |
 | 10 | [Automobile Sales During Recessions](10_automobile_sales_recession_analysis/) | EDA + dashboard | Comparative visual analysis, Dash | Sales fall by more than half in recessions |
+| 11 | [Impact of Noise on Data Quality](11_noise_impact_breast_cancer/) | Data quality | Gaussian noise simulation, distribution and correlation analysis | Noisy feature keeps r ≈ **0.89** with the original |
 
 **Stack:** Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, Plotly, Dash, Folium.
 
