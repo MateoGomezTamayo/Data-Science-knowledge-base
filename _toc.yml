@@ -65,3 +65,13 @@ parts:
           - file: 10_portfolio/10_automobile_sales_recession_analysis/analysis
           - file: 10_portfolio/11_noise_impact_breast_cancer/README
           - file: 10_portfolio/11_noise_impact_breast_cancer/analysis
+          - file: 10_portfolio/12_pca_dimensionality_reduction/README
+          - file: 10_portfolio/12_pca_dimensionality_reduction/analysis
+          - file: 10_portfolio/13_tsne_vs_umap/README
+          - file: 10_portfolio/13_tsne_vs_umap/analysis
+          - file: 10_portfolio/14_california_housing_random_forest/README
+          - file: 10_portfolio/14_california_housing_random_forest/analysis
+          - file: 10_portfolio/15_kmeans_cluster_evaluation/README
+          - file: 10_portfolio/15_kmeans_cluster_evaluation/analysis
+          - file: 10_portfolio/16_regularization_ridge_lasso/README
+          - file: 10_portfolio/16_regularization_ridge_lasso/analysis

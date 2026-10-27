@@ -1,6 +1,6 @@
 # Data Science Portfolio: Applied Analyses
 
-Eleven end-to-end analyses built during the IBM Data Science Professional Certificate. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
+Sixteen end-to-end analyses built during the IBM Data Science Professional Certificate. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
 
 | # | Project | Type | Techniques | Headline result |
 |---|---|---|---|---|
@@ -15,7 +15,12 @@ Eleven end-to-end analyses built during the IBM Data Science Professional Certif
 | 09 | [Australia Wildfire Analysis](09_australia_wildfire_analysis/) | EDA + dashboard | Matplotlib, Seaborn, Folium, Dash + Plotly | 26,406 records, 7 regions, interactive dashboard |
 | 10 | [Automobile Sales During Recessions](10_automobile_sales_recession_analysis/) | EDA + dashboard | Comparative visual analysis, Dash | Sales fall by more than half in recessions |
 | 11 | [Impact of Noise on Data Quality](11_noise_impact_breast_cancer/) | Data quality | Gaussian noise simulation, distribution and correlation analysis | Noisy feature keeps r ≈ **0.89** with the original |
+| 12 | [Principal Component Analysis](12_pca_dimensionality_reduction/) | Dimensionality reduction | PCA, projections, explained variance | 2 components keep **95.8%** of Iris variance |
+| 13 | [t-SNE vs UMAP](13_tsne_vs_umap/) | Dimensionality reduction | t-SNE, UMAP, 3-D Plotly | UMAP keeps the global layout that t-SNE distorts |
+| 14 | [California Housing Prices](14_california_housing_random_forest/) | Regression | Random Forest, residual diagnostics | R² **0.80**, MAE ≈ $32.8k |
+| 15 | [K-Means Cluster Evaluation](15_kmeans_cluster_evaluation/) | Clustering | Silhouette, Davies-Bouldin, stability across initializations | Silhouette **0.53**; same inertia in 8 runs |
+| 16 | [Regularization: Linear vs Ridge vs Lasso](16_regularization_ridge_lasso/) | Regression | Ridge, Lasso, outliers, sparse features | Lasso R² **0.98** vs 0.40 on sparse data |
 
-**Stack:** Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, Plotly, Dash, Folium.
+**Stack:** Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, Plotly, Dash, Folium, umap-learn.
 
 Datasets come from the IBM Skills Network course materials and public sources (UCI, Kaggle). Each notebook downloads its data from a public URL.
