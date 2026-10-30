@@ -75,3 +75,11 @@ parts:
           - file: 10_portfolio/15_kmeans_cluster_evaluation/analysis
           - file: 10_portfolio/16_regularization_ridge_lasso/README
           - file: 10_portfolio/16_regularization_ridge_lasso/analysis
+          - file: 10_portfolio/17_rainfall_prediction_classifier/README
+          - file: 10_portfolio/17_rainfall_prediction_classifier/rainfall_prediction_classifier
+          - file: 10_portfolio/18_titanic_survival_classification/README
+          - file: 10_portfolio/18_titanic_survival_classification/analysis
+          - file: 10_portfolio/19_spacex_data_collection_wrangling/README
+          - file: 10_portfolio/19_spacex_data_collection_wrangling/analysis
+          - file: 10_portfolio/20_expert_system_certainty_factors/README
+          - file: 10_portfolio/20_expert_system_certainty_factors/expert_system

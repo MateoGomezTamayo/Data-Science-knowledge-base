@@ -1,6 +1,6 @@
 # Data Science Portfolio: Applied Analyses
 
-Sixteen end-to-end analyses built during the IBM Data Science Professional Certificate. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
+Twenty analyses built during the IBM Data Science Professional Certificate and university coursework. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
 
 | # | Project | Type | Techniques | Headline result |
 |---|---|---|---|---|
@@ -20,6 +20,10 @@ Sixteen end-to-end analyses built during the IBM Data Science Professional Certi
 | 14 | [California Housing Prices](14_california_housing_random_forest/) | Regression | Random Forest, residual diagnostics | R² **0.80**, MAE ≈ $32.8k |
 | 15 | [K-Means Cluster Evaluation](15_kmeans_cluster_evaluation/) | Clustering | Silhouette, Davies-Bouldin, stability across initializations | Silhouette **0.53**; same inertia in 8 runs |
 | 16 | [Regularization: Linear vs Ridge vs Lasso](16_regularization_ridge_lasso/) | Regression | Ridge, Lasso, outliers, sparse features | Lasso R² **0.98** vs 0.40 on sparse data |
+| 17 | [Rainfall Prediction Classifier](17_rainfall_prediction_classifier/) | Binary classification | Pipelines, grid search, Random Forest vs Logistic Regression | Accuracy **0.84**; recall for rain 0.51 |
+| 18 | [Titanic Survival Classification](18_titanic_survival_classification/) | Binary classification | Pipelines, imputation, grid search | Accuracy **83.2%** vs 61.5% baseline |
+| 19 | [SpaceX Falcon 9 Data Collection and Wrangling](19_spacex_data_collection_wrangling/) | Data collection | REST data, JSON parsing, target creation | 90 launches, **66.7%** landing success |
+| 20 | [Sistema experto con factores de certeza](20_expert_system_certainty_factors/) | Expert system | Forward chaining, certainty factors | 4 of 4 cases match the expected result |
 
 **Stack:** Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, Plotly, Dash, Folium, umap-learn.
 
