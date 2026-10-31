@@ -83,3 +83,9 @@ parts:
           - file: 10_portfolio/19_spacex_data_collection_wrangling/analysis
           - file: 10_portfolio/20_expert_system_certainty_factors/README
           - file: 10_portfolio/20_expert_system_certainty_factors/expert_system
+          - file: 10_portfolio/21_spacex_capstone/README
+          - file: 10_portfolio/21_spacex_capstone/01_web_scraping
+          - file: 10_portfolio/21_spacex_capstone/02_eda_sql
+          - file: 10_portfolio/21_spacex_capstone/03_eda_visualization
+          - file: 10_portfolio/21_spacex_capstone/04_interactive_map
+          - file: 10_portfolio/21_spacex_capstone/05_classification

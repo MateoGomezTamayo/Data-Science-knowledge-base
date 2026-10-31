@@ -1,6 +1,6 @@
 # Data Science Portfolio: Applied Analyses
 
-Twenty analyses built during the IBM Data Science Professional Certificate and university coursework. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
+Twenty-one analyses built during the IBM Data Science Professional Certificate and university coursework. Each folder has a notebook with the full code and saved outputs, a key chart, and a README with the question, approach, results and findings.
 
 | # | Project | Type | Techniques | Headline result |
 |---|---|---|---|---|
@@ -24,6 +24,7 @@ Twenty analyses built during the IBM Data Science Professional Certificate and u
 | 18 | [Titanic Survival Classification](18_titanic_survival_classification/) | Binary classification | Pipelines, imputation, grid search | Accuracy **83.2%** vs 61.5% baseline |
 | 19 | [SpaceX Falcon 9 Data Collection and Wrangling](19_spacex_data_collection_wrangling/) | Data collection | REST data, JSON parsing, target creation | 90 launches, **66.7%** landing success |
 | 20 | [Sistema experto con factores de certeza](20_expert_system_certainty_factors/) | Expert system | Forward chaining, certainty factors | 4 of 4 cases match the expected result |
+| 21 | [SpaceX Falcon 9 Landing Prediction: Capstone](21_spacex_capstone/) | End-to-end project | Scraping, SQL, Folium, Dash, classification | 83.3% test accuracy vs 66.7% baseline |
 
 **Stack:** Python, pandas, NumPy, SciPy, scikit-learn, Matplotlib, Seaborn, Plotly, Dash, Folium, umap-learn.
 

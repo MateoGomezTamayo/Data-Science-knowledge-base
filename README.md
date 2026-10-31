@@ -4,7 +4,7 @@ Personal reference notebook collection covering advanced Data Science topics —
 
 ## ⭐ Portfolio: applied analyses
 
-Twenty projects, each with a notebook, a key chart and a README of findings. See [`10_portfolio/`](10_portfolio/).
+Twenty-one projects, each with a notebook, a key chart and a README of findings. See [`10_portfolio/`](10_portfolio/).
 
 | Project | Headline result |
 |---|---|
@@ -28,6 +28,7 @@ Twenty projects, each with a notebook, a key chart and a README of findings. See
 | [Titanic Survival Classification](10_portfolio/18_titanic_survival_classification/) | Accuracy 83.2% vs 61.5% baseline |
 | [SpaceX Falcon 9 Data Collection and Wrangling](10_portfolio/19_spacex_data_collection_wrangling/) | 90 launches, 66.7% landing success |
 | [Sistema experto con factores de certeza](10_portfolio/20_expert_system_certainty_factors/) | Forward chaining with certainty factors |
+| [SpaceX Falcon 9 Landing Prediction: Capstone](10_portfolio/21_spacex_capstone/) | 83.3% test accuracy vs 66.7% baseline |
 
 ## 📂 Structure
 
@@ -45,7 +46,7 @@ Twenty projects, each with a notebook, a key chart and a README of findings. See
 | `07_etl_data_wrangling/` | `data_preprocessing_notes.ipynb` | Formatting, type fixing, normalization (simple / min-max / z-score), binning, encoding |
 | `08_git_best_practices/` | `git_best_practices_advanced.ipynb` | Git workflow, project structure, environments, testing, MLflow, Docker/CI |
 | `09_generalist/` | `generalist_english.ipynb` | Grammar, critical reasoning, passage analysis |
-| `10_portfolio/` | 20 project folders | Applied regression, classification, EDA and dashboard projects |
+| `10_portfolio/` | 21 project folders | Applied regression, classification, EDA and dashboard projects |
 
 ## 🚀 Getting Started
 
